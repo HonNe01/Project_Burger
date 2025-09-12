@@ -23125,6 +23125,42 @@ PrefabInstance:
       propertyPath: spawnPointA
       value: 
       objectReference: {fileID: 1673074031}
+    - target: {fileID: 7064145033275262556, guid: 542c96c64b2a24b8c99e7fc016ee6b90, type: 3}
+      propertyPath: customerPrefabs.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7064145033275262556, guid: 542c96c64b2a24b8c99e7fc016ee6b90, type: 3}
+      propertyPath: customerPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 5516404325761119518, guid: 763361c9ed87846c49b2d6ba0302788d, type: 3}
+    - target: {fileID: 7064145033275262556, guid: 542c96c64b2a24b8c99e7fc016ee6b90, type: 3}
+      propertyPath: customerPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 1228815849030776254, guid: cfa3616f194c140208f9bc7d6dd9b676, type: 3}
+    - target: {fileID: 7064145033275262556, guid: 542c96c64b2a24b8c99e7fc016ee6b90, type: 3}
+      propertyPath: customerPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 4843328033091409256, guid: c509dd378d4514873a8a7bd584043b2f, type: 3}
+    - target: {fileID: 7064145033275262556, guid: 542c96c64b2a24b8c99e7fc016ee6b90, type: 3}
+      propertyPath: customerPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 9135189695448661818, guid: 0e21fb9eabab64b61b5bf89ecc4986fc, type: 3}
+    - target: {fileID: 7064145033275262556, guid: 542c96c64b2a24b8c99e7fc016ee6b90, type: 3}
+      propertyPath: customerPrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 31736035156423869, guid: d69ce0961993f4763b5e0e583c490e77, type: 3}
+    - target: {fileID: 7064145033275262556, guid: 542c96c64b2a24b8c99e7fc016ee6b90, type: 3}
+      propertyPath: customerPrefabs.Array.data[5]
+      value: 
+      objectReference: {fileID: 4377917735626974154, guid: c5c501dc15e3d48c0b39acb8b6cdf4f5, type: 3}
+    - target: {fileID: 7064145033275262556, guid: 542c96c64b2a24b8c99e7fc016ee6b90, type: 3}
+      propertyPath: customerPrefabs.Array.data[6]
+      value: 
+      objectReference: {fileID: 1683243001068976468, guid: 63c1b1330393941b48978db171d27f65, type: 3}
+    - target: {fileID: 7064145033275262556, guid: 542c96c64b2a24b8c99e7fc016ee6b90, type: 3}
+      propertyPath: customerPrefabs.Array.data[7]
+      value: 
+      objectReference: {fileID: 6394678709001958461, guid: 8f3e67555094c4de4aa6aa580fdecf68, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
