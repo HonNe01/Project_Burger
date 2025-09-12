@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class CustomerManager : MonoBehaviour
 {
+    public static CustomerManager instance;
+
     [Header("손님 프리펩")]
     public List<GameObject> customerPrefabs;
 
     [Header("스폰 지점 (A)")]
-    public Transform spawnPointA;
+    public Transform spawnPoint;
+
+    [Header("주문 지점 (B)")]
+    public Transform orderPoint;
+
+    [Header("퇴장 지점 (C)")]
+    public Transform exitPoint;
 
     [Header("소환 주기 범위")]
     public Vector2 easySapwnInterval = new Vector2(15f, 20f);
@@ -18,7 +26,19 @@ public class CustomerManager : MonoBehaviour
     [Header("난이도 설정")]
     public bool hardMode = false;
 
-    
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+
+            return;
+        }
+
+        instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,10 +64,10 @@ public class CustomerManager : MonoBehaviour
                 Random.Range(easySapwnInterval.x, easySapwnInterval.y);
 
             // 손님 랜덤 선택 + 소환
-            if (customerPrefabs.Count > 0 && spawnPointA != null)
+            if (customerPrefabs.Count > 0 && spawnPoint != null)
             {
                 int index = Random.Range(0, customerPrefabs.Count);
-                Instantiate(customerPrefabs[index], spawnPointA.position, spawnPointA.rotation);
+                Instantiate(customerPrefabs[index], spawnPoint.position, spawnPoint.rotation);
 
                 Debug.Log("[Customer Manager] 손님 생성!");
             }

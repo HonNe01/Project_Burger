@@ -6,7 +6,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 public class Customer : MonoBehaviour
 {
-    public enum CustomerState { Enter, Wait, Order, Exit }
+    public enum CustomerState { Enter, Wait, Order, OrderWait, Exit }
     public CustomerState currentState = CustomerState.Enter;
 
     [Header("이동 관련")]
@@ -17,10 +17,6 @@ public class Customer : MonoBehaviour
     [Header("주문 관련")]
     public float orderTimeLimit = 20f;
     private float orderTimer;
-
-    [Header("퇴장 관련")]
-    public Transform exitPoint;
-
 
 
     void Awake()
@@ -55,6 +51,9 @@ public class Customer : MonoBehaviour
                 // 주문 대기열 상태에 따라 변경
                 break;
             case CustomerState.Order:
+                EnterOrderState();
+                break;
+            case CustomerState.OrderWait:
                 UpdateOrderState();
                 break;
             case CustomerState.Exit:
@@ -70,25 +69,25 @@ public class Customer : MonoBehaviour
             // 대기열에 따라 Order, Wait 결정
             if (targetPoint.CompareTag("CounterPoint"))
             {
-                EnterOrderState();
+                currentState = CustomerState.Order;
             }
             else
             {
                 currentState = CustomerState.Wait;
-
-                agent.isStopped = true;
             }
         }
     }
 
     void EnterOrderState()
     {
-        currentState = CustomerState.Order;
         agent.isStopped = true;
         orderTimer = orderTimeLimit;
 
+        List<Ingredient> myOrder = OrderManager.instance.Order();
+
         // 손님 주문 데이터 생성 코드 추가 필요
-        Debug.Log("주문 시작");
+        Debug.Log("주문 시작 : " + string.Join(", ", myOrder));
+        currentState = CustomerState.OrderWait;
     }
 
     void UpdateOrderState()
@@ -97,18 +96,17 @@ public class Customer : MonoBehaviour
 
         if (orderTimer <= 0f)
         {
-            Debug.Log("손님 퇴장");
+            Debug.Log("손님 퇴장!!");
+            // 감점 코드 추가
+            
             EnterExitState();
+            currentState = CustomerState.Exit;
         }
     }
 
     void EnterExitState()
     {
-        currentState = CustomerState.Exit;
-        agent.isStopped = false;
-        agent.SetDestination(exitPoint.position);
-
-        // 손님 사라지는 코드 추가 필요
+        SetTarget(CustomerManager.instance.exitPoint);
     }
 
     void CheckArrival_Exit()
