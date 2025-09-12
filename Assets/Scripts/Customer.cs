@@ -23,32 +23,16 @@ public class Customer : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
     }
-
-    void Start()
-    {
-        if (targetPoint == null)
-        {
-            GameObject counter = GameObject.FindGameObjectWithTag("CounterPoint");
-
-            if (counter != null)
-            {
-                targetPoint = counter.transform;
-            }
-        }
-
-        SetTarget(targetPoint);
-    }
-
+    
     void Update()
     {
         switch (currentState)
         {
             case CustomerState.Enter:
-                CheckArrival_Enter();
-
+                // TargetPoint로 이동
                 break;
             case CustomerState.Wait:
-                // 주문 대기열 상태에 따라 변경
+                
                 break;
             case CustomerState.Order:
                 EnterOrderState();
@@ -62,20 +46,9 @@ public class Customer : MonoBehaviour
         }
     }
 
-    void CheckArrival_Enter()
+    public void EnterOrderPoint()
     {
-        if (!agent.pathPending && agent.remainingDistance <= stopDistance)
-        {
-            // 대기열에 따라 Order, Wait 결정
-            if (targetPoint.CompareTag("CounterPoint"))
-            {
-                currentState = CustomerState.Order;
-            }
-            else
-            {
-                currentState = CustomerState.Wait;
-            }
-        }
+        SetTarget(CustomerManager.instance.orderPoint);
     }
 
     void EnterOrderState()
@@ -98,7 +71,7 @@ public class Customer : MonoBehaviour
         {
             Debug.Log("손님 퇴장!!");
             // 감점 코드 추가
-            
+
             EnterExitState();
             currentState = CustomerState.Exit;
         }
