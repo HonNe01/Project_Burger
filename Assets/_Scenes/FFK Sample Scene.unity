@@ -23772,6 +23772,7 @@ MonoBehaviour:
   m_StartingSelectFilters: []
   m_StartingInteractionStrengthFilters: []
   ingredientPrefab: {fileID: 2896389125435324988, guid: d50124f3c352b4b608567e84e4647068, type: 3}
+  spawnTransform: {fileID: 5063700735338113768}
 --- !u!65 &5063700735338113770
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24096,6 +24097,7 @@ MonoBehaviour:
   m_StartingSelectFilters: []
   m_StartingInteractionStrengthFilters: []
   ingredientPrefab: {fileID: 4766762238791039797, guid: e0694ff7a013d4bde9729a0ff3dcc613, type: 3}
+  spawnTransform: {fileID: 7314925695409422136}
 --- !u!65 &7314925695409422138
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24232,6 +24234,7 @@ MonoBehaviour:
   m_StartingSelectFilters: []
   m_StartingInteractionStrengthFilters: []
   ingredientPrefab: {fileID: 491540523578944947, guid: 855000c4df97944c8a8299540841bc7b, type: 3}
+  spawnTransform: {fileID: 8696417522394002344}
 --- !u!65 &8696417522394002346
 BoxCollider:
   m_ObjectHideFlags: 0

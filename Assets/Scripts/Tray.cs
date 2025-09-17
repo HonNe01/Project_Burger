@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
@@ -8,7 +7,7 @@ public class Tray : XRBaseInteractable
 {
     [Header("Topping Prefab")]
     public GameObject ingredientPrefab;
-    private Transform spawnTransform;
+    public Transform spawnTransform;
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
