@@ -15,4 +15,4 @@ MonoBehaviour:
   m_isInstallingWaveXRPlugin: 0
   m_isInstallingOpenVRXRPlugin: 0
   m_ignoreKeys:
-  - BuildTarget
+  - ReviewOpenXRProjectValidationIssues
