@@ -1,5 +1,23 @@
 {
   "dependencies": {
+    "com.htc.upm.vive-input-utility": {
+      "version": "1.20.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.ugui": "1.0.0"
+      },
+      "url": "https://npm-registry.vive.com"
+    },
+    "com.htc.upm.wave.xrsdk": {
+      "version": "5.6.0-r.10.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.xr.management": "3.2.4"
+      },
+      "url": "https://npm-registry.vive.com"
+    },
     "com.unity.ai.navigation": {
       "version": "1.1.7",
       "depth": 0,
