@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2892204826358271332}
   - component: {fileID: 7689227390858600295}
   - component: {fileID: 4186050898209536523}
+  - component: {fileID: 6994748967971956368}
   m_Layer: 0
   m_Name: Patty_low.001
   m_TagString: Untagged
@@ -133,3 +134,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6994748967971956368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461888261538612911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d3717fc9671e4254a680b8f6cba9507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientType: 0
+  ingredientPrefab: {fileID: 0}

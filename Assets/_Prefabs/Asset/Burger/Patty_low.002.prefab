@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7553979907257782388}
   - component: {fileID: -6534685509058055955}
   - component: {fileID: -8265257530915355296}
+  - component: {fileID: -893968056393786729}
   m_Layer: 0
   m_Name: Patty_low.002
   m_TagString: Untagged
@@ -149,3 +150,17 @@ MonoBehaviour:
   rawPattyPrefab: {fileID: 0}
   cookedPattyPrefab: {fileID: 1461888261538612911, guid: e6fba510cc27640f08ca5efd79163b67, type: 3}
   burntPattyPrefab: {fileID: 8947591380214308631, guid: 4bf3903b572a843fba91321cc5900960, type: 3}
+--- !u!114 &-893968056393786729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2896389125435324988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d3717fc9671e4254a680b8f6cba9507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientType: 0
+  ingredientPrefab: {fileID: 0}
