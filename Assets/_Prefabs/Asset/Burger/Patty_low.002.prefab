@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 5063700733563423741}
   - component: {fileID: 2931885115033946954}
   - component: {fileID: 1941561357176823364}
+  - component: {fileID: 7553979907257782388}
+  - component: {fileID: -6534685509058055955}
+  - component: {fileID: -8265257530915355296}
   m_Layer: 0
   m_Name: Patty_low.002
   m_TagString: Untagged
@@ -83,3 +86,66 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7553979907257782388
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2896389125435324988}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.7670666, y: 0.310819, z: 1.7670666}
+  m_Center: {x: 0, y: 0.20690529, z: 0}
+--- !u!54 &-6534685509058055955
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2896389125435324988}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &-8265257530915355296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2896389125435324988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b485556062648ee85847a69d88cd30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rawPattyPrefab: {fileID: 0}
+  cookedPattyPrefab: {fileID: 1461888261538612911, guid: e6fba510cc27640f08ca5efd79163b67, type: 3}
+  burntPattyPrefab: {fileID: 8947591380214308631, guid: 4bf3903b572a843fba91321cc5900960, type: 3}
