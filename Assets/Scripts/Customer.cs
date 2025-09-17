@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
+[RequireComponent(typeof(NavMeshAgent))]
 public class Customer : MonoBehaviour
 {
     public enum CustomerState { Enter, Wait, Order, OrderWait, Exit }
@@ -11,8 +11,8 @@ public class Customer : MonoBehaviour
 
     [Header("이동 관련")]
     private NavMeshAgent agent;
-    public Transform targetPoint;
-    public float stopDistance = 0.1f;
+    [SerializeField] private Transform targetPoint;
+    
 
     [Header("주문 관련")]
     public float orderTimeLimit = 20f;
@@ -29,7 +29,7 @@ public class Customer : MonoBehaviour
         switch (currentState)
         {
             case CustomerState.Enter:
-                EnterOrderPoint();
+                Check_Enter();
                 break;
             case CustomerState.Wait:
                 
@@ -41,26 +41,37 @@ public class Customer : MonoBehaviour
                 UpdateOrderState();
                 break;
             case CustomerState.Exit:
-                CheckArrival_Exit();
+                Check_Exit();
                 break;
         }
     }
 
-    public void EnterOrderPoint()
+    private void Check_Enter()  // OrderPoint 도착 판단
     {
-        SetTarget(CustomerManager.instance.orderPoint);
+        if (!agent.pathPending && agent.remainingDistance <= CustomerManager.instance.stopDistance)
+        {
+            // OrderPoint 도착 시 주문
+            if (targetPoint == CustomerManager.instance.orderPoint)
+            {
+                currentState = CustomerState.Order;
+            }
+            else
+            {
+                currentState = CustomerState.Wait;
+            }
+        }
     }
 
-    void EnterOrderState()
+    void EnterOrderState()      // Order 시작
     {
         agent.isStopped = true;
-        orderTimer = orderTimeLimit;
 
+        // 주문 생성
         List<Ingredient> myOrder = OrderManager.instance.Order();
-
-        // 손님 주문 데이터 생성 코드 추가 필요
         Debug.Log("주문 시작 : " + string.Join(", ", myOrder));
+
         currentState = CustomerState.OrderWait;
+        orderTimer = orderTimeLimit;
     }
 
     void UpdateOrderState()
@@ -69,7 +80,7 @@ public class Customer : MonoBehaviour
 
         if (orderTimer <= 0f)
         {
-            Debug.Log("손님 퇴장!!");
+            Debug.Log("손님 퇴장!! (시간 초과)");
             // 감점 코드 추가
 
             EnterExitState();
@@ -77,15 +88,23 @@ public class Customer : MonoBehaviour
         }
     }
 
+    public void CompleteOrder()
+    {
+        Debug.Log("손님 퇴장!! (주문 완료)");
+        EnterExitState();
+    }
+
     void EnterExitState()
     {
+        currentState = CustomerState.Exit;
         SetTarget(CustomerManager.instance.exitPoint);
     }
 
-    void CheckArrival_Exit()
+    void Check_Exit()
     {
-        if (!agent.pathPending && agent.remainingDistance <= stopDistance)
+        if (!agent.pathPending && agent.remainingDistance <= CustomerManager.instance.stopDistance)
         {
+            CustomerManager.instance.RemoveCustomer(this);
             Destroy(gameObject);
         }
     }
@@ -93,15 +112,7 @@ public class Customer : MonoBehaviour
     public void SetTarget(Transform point)
     {
         targetPoint = point;
-        MoveToTarget();
-    }
-
-    void MoveToTarget()
-    {
-        if (agent != null && targetPoint != null)
-        {
-            agent.isStopped = false;
-            agent.SetDestination(targetPoint.position);
-        }
+        agent.isStopped = false;
+        agent.SetDestination(point.position);
     }
 }

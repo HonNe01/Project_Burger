@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5448668867282473098}
+  - component: {fileID: 4809930718484167702}
   m_Layer: 0
   m_Name: OrderManager
   m_TagString: Untagged
@@ -31,3 +32,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4809930718484167702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660386991168787876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b308a524f6b94301916a14f87a2feb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patty1Prob: 0.6
+  patty2Prob: 0.3
+  patty3Prob: 0.1
+  lettuce0Prob: 0.3
+  lettuce1Prob: 0.6
+  lettuce2Prob: 0.1
+  tomato0Prob: 0.5
+  tomato1Prob: 0.4
+  tomato2Prob: 0.1
+  cheese0Prob: 0.2
+  cheese1Prob: 0.6
+  cheese2Prob: 0.2
+  onion0Prob: 0.4
+  onion1Prob: 0.5
+  onion2Prob: 0.1

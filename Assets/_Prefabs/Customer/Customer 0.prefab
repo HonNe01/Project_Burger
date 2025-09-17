@@ -1250,9 +1250,8 @@ GameObject:
   - component: {fileID: 1961323154914820344}
   - component: {fileID: 3054836196790141842}
   - component: {fileID: 3415320774382213298}
-  - component: {fileID: -4809744869764474466}
   m_Layer: 0
-  m_Name: A
+  m_Name: Customer 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1332,24 +1331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   targetPoint: {fileID: 0}
-  stopDistance: 0.1
-  orderTimeLimit: 20
---- !u!114 &-4809744869764474466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5516404325761119518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d12ee00753a9549f19d2cad69e1b125c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentState: 0
-  targetPoint: {fileID: 0}
-  stopDistance: 0.1
-  orderTimeLimit: 5
+  orderTimeLimit: 10
 --- !u!1 &5583709358732686423
 GameObject:
   m_ObjectHideFlags: 0

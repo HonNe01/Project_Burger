@@ -8,26 +8,32 @@ public class CustomerManager : MonoBehaviour
 
     [Header("Customer Setting")]
     public List<GameObject> customerPrefabs;
+    public float stopDistance = 0.1f;
 
-    [Header("스폰 지점 (A)")]
+
+    [Header("Spawn Point (A)")]
     public Transform spawnPoint;
 
-    [Header("주문 지점 (B)")]
+    [Header("Order Point (B)")]
     public Transform orderPoint;
 
-    [Header("퇴장 지점 (C)")]
+    [Header("Exit Point (C)")]
     public Transform exitPoint;
 
-    [Header("소환 주기")]
-    public Vector2 easySapwnInterval = new Vector2(15f, 20f);
+
+    [Header("Spawn Interval")]
+    public Vector2 easySpawnInterval = new Vector2(15f, 20f);
     public Vector2 hardSpawnInterval = new Vector2(10f, 12f);
     float interval;
 
-    [Header("난이도 설정")]
+
+    [Header("Level Setting")]
     public bool hardMode = false;
 
+
     [Header("Waiting Setting")]
-    public float queueSpacing = 1f;
+    [Tooltip("손님 기다리는 줄 간격")]
+    public float queueSpacing = 3f;
     private List<Customer> customerQueue = new List<Customer>();
 
 
@@ -52,40 +58,42 @@ public class CustomerManager : MonoBehaviour
         }
         else
         {
-            Debug.Log($"[Customer Manager] 경영 시작! 현재 모드 : Easy, 손님 간격 : {easySapwnInterval}");
+            Debug.Log($"[Customer Manager] 경영 시작! 현재 모드 : Easy, 손님 간격 : {easySpawnInterval}");
         }
 
-        StartCoroutine(SpawnCustomer());
+        customerQueue.Clear();
+        StartCoroutine(Co_SpawnCustomer());
     }
 
-    private IEnumerator SpawnCustomer()
+    private IEnumerator Co_SpawnCustomer()
     {
         while (true)
         {
             // 현재 난이도 판단
             interval = hardMode ?
                 Random.Range(hardSpawnInterval.x, hardSpawnInterval.y) :
-                Random.Range(easySapwnInterval.x, easySapwnInterval.y);
+                Random.Range(easySpawnInterval.x, easySpawnInterval.y);
 
             // 손님 랜덤 선택 + 소환
-            if (customerPrefabs.Count > 0 && spawnPoint != null)
-            {
-                int index = Random.Range(0, customerPrefabs.Count);
-                GameObject newCustomerObj = Instantiate(customerPrefabs[index], spawnPoint.position, spawnPoint.rotation);
-                Customer newCustomer = newCustomerObj.GetComponent<Customer>();
-
-                customerQueue.Add(newCustomer);
-
-                UpdateQueue();
-
-                Debug.Log("[Customer Manager] 손님 생성!");
-            }
-
+            SpawnCustomer();
+            Debug.Log("[Customer Manager] 손님 생성!");
 
             // 손님 대기
             Debug.Log($"[Customer Manager] 다음 손님까지 {interval}초");
             yield return new WaitForSeconds(interval);
         }
+    }
+
+    private void SpawnCustomer()
+    {
+        if (customerPrefabs.Count == 0) return;
+
+        int index = Random.Range(0, customerPrefabs.Count);
+        GameObject obj = Instantiate(customerPrefabs[index], spawnPoint.position, spawnPoint.rotation);
+        Customer cust = obj.GetComponent<Customer>();
+
+        customerQueue.Add(cust);
+        UpdateQueue();
     }
 
     private void UpdateQueue()
@@ -97,23 +105,22 @@ public class CustomerManager : MonoBehaviour
             if (i == 0)
             {
                 // 맨 앞 손님은 카운터로
+                cust.SetTarget(orderPoint);
                 cust.currentState = Customer.CustomerState.Enter;
             }
             else
             {
                 // 뒷 손님 줄 세우기
                 Vector3 waitPos = orderPoint.position - orderPoint.forward * (queueSpacing * i);
-
                 GameObject temp = new GameObject("QueuePos");
                 temp.transform.position = waitPos;
                 cust.SetTarget(temp.transform);
-
                 Destroy(temp);
             }
         }
     }
 
-    public void RemoveCustomer(Customer cust)
+    public void RemoveCustomer(Customer cust)   // 손님 퇴장 -> 큐에서 제거 -> 큐 재정렬
     {
         if (customerQueue.Contains(cust))
         {

@@ -14216,7 +14216,7 @@ Transform:
   m_GameObject: {fileID: 1353872511}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.22, y: 0.9486972, z: 15.46}
+  m_LocalPosition: {x: 0.06, y: 0.9486972, z: 15.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22947,43 +22947,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 660386991168787876, guid: 11590ee3b197b4f18ac699d3c364e53e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2619753116720492331}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11590ee3b197b4f18ac699d3c364e53e, type: 3}
---- !u!1 &2619753116720492330 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 660386991168787876, guid: 11590ee3b197b4f18ac699d3c364e53e, type: 3}
-  m_PrefabInstance: {fileID: 2619753116720492329}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2619753116720492331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2619753116720492330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b308a524f6b94301916a14f87a2feb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  patty1Prob: 0.6
-  patty2Prob: 0.3
-  patty3Prob: 0.1
-  lettuce0Prob: 0.3
-  lettuce1Prob: 0.6
-  lettuce2Prob: 0.1
-  tomato0Prob: 0.5
-  tomato1Prob: 0.4
-  tomato2Prob: 0.1
-  cheese0Prob: 0.2
-  cheese1Prob: 0.6
-  cheese2Prob: 0.2
-  onion0Prob: 0.4
-  onion1Prob: 0.5
-  onion2Prob: 0.1
 --- !u!1001 &2996083574718553301
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23122,45 +23087,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1673074031}
     - target: {fileID: 7064145033275262556, guid: 542c96c64b2a24b8c99e7fc016ee6b90, type: 3}
-      propertyPath: spawnPointA
-      value: 
-      objectReference: {fileID: 1673074031}
-    - target: {fileID: 7064145033275262556, guid: 542c96c64b2a24b8c99e7fc016ee6b90, type: 3}
-      propertyPath: customerPrefabs.Array.size
-      value: 8
+      propertyPath: queueSpacing
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7064145033275262556, guid: 542c96c64b2a24b8c99e7fc016ee6b90, type: 3}
-      propertyPath: customerPrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 5516404325761119518, guid: 763361c9ed87846c49b2d6ba0302788d, type: 3}
-    - target: {fileID: 7064145033275262556, guid: 542c96c64b2a24b8c99e7fc016ee6b90, type: 3}
-      propertyPath: customerPrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 1228815849030776254, guid: cfa3616f194c140208f9bc7d6dd9b676, type: 3}
-    - target: {fileID: 7064145033275262556, guid: 542c96c64b2a24b8c99e7fc016ee6b90, type: 3}
-      propertyPath: customerPrefabs.Array.data[2]
-      value: 
-      objectReference: {fileID: 4843328033091409256, guid: c509dd378d4514873a8a7bd584043b2f, type: 3}
-    - target: {fileID: 7064145033275262556, guid: 542c96c64b2a24b8c99e7fc016ee6b90, type: 3}
-      propertyPath: customerPrefabs.Array.data[3]
-      value: 
-      objectReference: {fileID: 9135189695448661818, guid: 0e21fb9eabab64b61b5bf89ecc4986fc, type: 3}
-    - target: {fileID: 7064145033275262556, guid: 542c96c64b2a24b8c99e7fc016ee6b90, type: 3}
-      propertyPath: customerPrefabs.Array.data[4]
-      value: 
-      objectReference: {fileID: 31736035156423869, guid: d69ce0961993f4763b5e0e583c490e77, type: 3}
-    - target: {fileID: 7064145033275262556, guid: 542c96c64b2a24b8c99e7fc016ee6b90, type: 3}
-      propertyPath: customerPrefabs.Array.data[5]
-      value: 
-      objectReference: {fileID: 4377917735626974154, guid: c5c501dc15e3d48c0b39acb8b6cdf4f5, type: 3}
-    - target: {fileID: 7064145033275262556, guid: 542c96c64b2a24b8c99e7fc016ee6b90, type: 3}
-      propertyPath: customerPrefabs.Array.data[6]
-      value: 
-      objectReference: {fileID: 1683243001068976468, guid: 63c1b1330393941b48978db171d27f65, type: 3}
-    - target: {fileID: 7064145033275262556, guid: 542c96c64b2a24b8c99e7fc016ee6b90, type: 3}
-      propertyPath: customerPrefabs.Array.data[7]
-      value: 
-      objectReference: {fileID: 6394678709001958461, guid: 8f3e67555094c4de4aa6aa580fdecf68, type: 3}
+      propertyPath: stopDistance
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
