@@ -29,7 +29,7 @@ public class Customer : MonoBehaviour
         switch (currentState)
         {
             case CustomerState.Enter:
-                // TargetPoint로 이동
+                EnterOrderPoint();
                 break;
             case CustomerState.Wait:
                 
