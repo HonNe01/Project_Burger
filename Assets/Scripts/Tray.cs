@@ -11,19 +11,29 @@ public class Tray : XRBaseInteractable
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
+        // XRIT 기본 처리
         base.OnSelectEntered(args);
 
-        if (ingredientPrefab == null) return;
+        if (ingredientPrefab == null || spawnTransform == null) return;
+
+        // 어떤 손인지
+        var interactor = args.interactableObject as XRBaseInteractor;
+        if (interactor == null) return;
+
+        // 트레이 놓기
+        interactor.EndManualInteraction();
 
         // 재료 소환
         GameObject inst = Instantiate(ingredientPrefab, spawnTransform.position, Quaternion.identity);
 
         var grab = inst.GetComponent<XRGrabInteractable>();
-        IXRSelectInteractable interactable = grab;
-        var interactor = args.interactableObject as XRBaseInteractor;
-        if (interactor != null)
-            interactor.StartManualInteraction(interactable);
+        if (grab == null)
+        {
+            grab = inst.AddComponent<XRGrabInteractable>();
+        }
 
-        args.interactableObject = null;
+        // 재료 손에 들기
+        IXRSelectInteractable interactable = grab;
+        interactor.StartManualInteraction(interactable);
     }
 }
