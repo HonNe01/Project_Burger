@@ -23,7 +23,7 @@ public class Customer : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
     }
-    
+
     void Update()
     {
         switch (currentState)
@@ -68,7 +68,7 @@ public class Customer : MonoBehaviour
 
         // 주문 생성
         List<Ingredient> myOrder = OrderManager.instance.Order();
-        Debug.Log("주문 시작 : " + string.Join(", ", myOrder));
+        Debug.Log($"[{gameObject.name}] 주문 시작 : " + string.Join(", ", myOrder));
 
         currentState = CustomerState.OrderWait;
         orderTimer = orderTimeLimit;
@@ -80,7 +80,7 @@ public class Customer : MonoBehaviour
 
         if (orderTimer <= 0f)
         {
-            Debug.Log("손님 퇴장!! (시간 초과)");
+            Debug.Log($"[{gameObject.name}] 손님 퇴장!! (시간 초과)");
             // 감점 코드 추가
 
             EnterExitState();
@@ -90,12 +90,19 @@ public class Customer : MonoBehaviour
 
     public void CompleteOrder()
     {
-        Debug.Log("손님 퇴장!! (주문 완료)");
+        Debug.Log($"[{gameObject.name}] 손님 퇴장!! (주문 완료)");
         EnterExitState();
     }
 
     void EnterExitState()
     {
+        // 대기열에서 제거
+        CustomerManager.instance.RemoveCustomer(this);
+
+        // 주문 제거
+        OrderManager.instance.OrderClear();
+
+        // 손님 상태 변경
         currentState = CustomerState.Exit;
         SetTarget(CustomerManager.instance.exitPoint);
     }
@@ -104,7 +111,7 @@ public class Customer : MonoBehaviour
     {
         if (!agent.pathPending && agent.remainingDistance <= CustomerManager.instance.stopDistance)
         {
-            CustomerManager.instance.RemoveCustomer(this);
+            
             Destroy(gameObject);
         }
     }
