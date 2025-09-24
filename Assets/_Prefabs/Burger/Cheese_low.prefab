@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 3994612239054783693}
   - component: {fileID: 41046407656284047}
   - component: {fileID: -6586302257920386681}
-  - component: {fileID: 2882347255553909623}
   m_Layer: 0
   m_Name: Cheese_low
   m_TagString: Untagged
@@ -272,16 +271,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.9975668, y: 0.30092478, z: 1.9981148}
   m_Center: {x: -0.000047028072, y: -0.13628271, z: -0.0002613664}
---- !u!114 &2882347255553909623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6206244551399176566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72115580717a842879d4824cb0112943, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ingredientTag: Cheese_low

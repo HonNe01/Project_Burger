@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2892204826358271332}
   - component: {fileID: 6994748967971956368}
   - component: {fileID: -5633301523848323186}
-  - component: {fileID: -6763290735853258016}
   m_Layer: 0
   m_Name: Patty_Cooked
   m_TagString: Untagged
@@ -121,16 +120,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.7670666, y: 0.310819, z: 1.7670666}
   m_Center: {x: 0, y: 0.20690529, z: 0}
---- !u!114 &-6763290735853258016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1461888261538612911}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72115580717a842879d4824cb0112943, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ingredientTag: Patty_Cooked

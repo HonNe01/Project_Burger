@@ -4,84 +4,68 @@ using UnityEngine;
 
 public class Plate : MonoBehaviour
 {
-    [Header("Plate Setting")]
-    public Transform stackOrigin;   // 기준점
-    public float heightStep = 0.05f;    // 토핑 높이 증가
+    public Transform plateCenter;        // 중앙 정렬 기준
+    public Collider plateTrigger;        // 올려졌는지 판정용 Trigger
 
-    [Header("Order List")]
-    private List<Ingredient> stackedIngredients = new List<Ingredient>();   // 도마
-    private List<GameObject> stackedToppingObjects = new List<GameObject>();// 주문
+    private List<Ingredient> stackedIngredients = new List<Ingredient>();
+    private float stackHeight = 0f;      // 현재까지 쌓인 높이
 
-    private Collider plateCollider;
-
-    void Awake()
+    public bool IsPositionOnPlate(Vector3 position)
     {
-        plateCollider = GetComponent<Collider>();
+        return plateTrigger.bounds.Contains(position);
     }
 
-    public void AddTopping(GameObject topping, Ingredient ingredientType)
+    public void AddTopping(GameObject toppingObj, Ingredient ingredientType)
     {
-        // 부모 변경
-        topping.transform.SetParent(stackOrigin);
+        // 쌓을 높이 계산
+        Collider col = toppingObj.GetComponent<Collider>();
+        float height = col != null ? col.bounds.size.y : 0.2f;
 
-        // 다음 층 계산
-        Vector3 localPos = Vector3.zero;
-        localPos.y = heightStep * stackedToppingObjects.Count;
+        // 목표 위치 계산
+        Vector3 targetPos = plateCenter.position + new Vector3(0, stackHeight + height / 2f, 0);
 
-        // 재료 배치
-        topping.transform.localPosition = localPos;
-        topping.transform.localRotation = Quaternion.identity;
-
-        // 물리 정리 : 도마에 올린 뒤엔 움직이지 않게
-        Rigidbody rb = topping.GetComponent<Rigidbody>();
+        // Rigidbody 제어 (중력 끄기)
+        Rigidbody rb = toppingObj.GetComponent<Rigidbody>();
         if (rb != null)
         {
             rb.isKinematic = true;
             rb.useGravity = false;
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
         }
 
-        // 리스트에 기록
-        stackedToppingObjects.Add(topping);
+        // 부드럽게 이동 시작
+        StartCoroutine(SmoothMove(toppingObj.transform, targetPos, plateCenter.rotation, 0.3f));
+
+        // 리스트에 저장
         stackedIngredients.Add(ingredientType);
+
+        // 높이 갱신
+        stackHeight += height;
+
+        Debug.Log($"[Plate] {ingredientType} 추가됨. 현재 {stackedIngredients.Count}개 쌓임");
     }
 
-    public bool IsPositionOnPlate(Vector3 worldPos)
+    private IEnumerator SmoothMove(Transform obj, Vector3 targetPos, Quaternion targetRot, float duration)
     {
-        // 도마에 닿았는지 판단
-        if (plateCollider == null) return false;
-        return plateCollider.bounds.Contains(worldPos);
-    }
+        Vector3 startPos = obj.position;
+        Quaternion startRot = obj.rotation;
+        float elapsed = 0f;
 
-    public bool CompareOrder(List<Ingredient> order)
-    {
-        // 주문이랑 동일한지 판단 (순서상관 O)
-        if (order.Count != stackedIngredients.Count) return false;
-        for (int i = 0; i < order.Count; i++)
+        while (elapsed < duration)
         {
-            if (order[i] != stackedIngredients[i]) return false;
-        }
-        return true;
-    }
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
 
-    public bool CompareOrderUnordered(List<Ingredient> order)
-    {
-        // 주문이랑 동일한지 판단 (순서상관 X)
-        if (order.Count != stackedIngredients.Count) return false;
+            // 부드러운 곡선 (ease out)
+            t = t * t * (3f - 2f * t);
 
-        var dict = new Dictionary<Ingredient, int>();
-        foreach (var ing in stackedIngredients)
-        {
-            if (!dict.ContainsKey(ing)) dict[ing] = 0;
-            dict[ing]++;
+            obj.position = Vector3.Lerp(startPos, targetPos, t);
+            obj.rotation = Quaternion.Slerp(startRot, targetRot, t);
+
+            yield return null;
         }
-        foreach (var ing in order)
-        {
-            if (!dict.ContainsKey(ing)) return false;
-            dict[ing]--;
-            if (dict[ing] < 0) return false;
-        }
-        return true;
+
+        // 최종 위치 고정
+        obj.position = targetPos;
+        obj.rotation = targetRot;
     }
 }
