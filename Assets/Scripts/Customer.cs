@@ -10,17 +10,20 @@ public class Customer : MonoBehaviour
     public CustomerState currentState = CustomerState.Enter;
 
     [Header("이동 관련")]
+    private Animator anim;
     private NavMeshAgent agent;
     [SerializeField] private Transform targetPoint;
-    
+
 
     [Header("주문 관련")]
+    public bool isAngry;
     public float orderTimeLimit = 20f;
     private float orderTimer;
 
 
     void Awake()
     {
+        anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -32,7 +35,7 @@ public class Customer : MonoBehaviour
                 Check_Enter();
                 break;
             case CustomerState.Wait:
-                
+
                 break;
             case CustomerState.Order:
                 EnterOrderState();
@@ -44,6 +47,8 @@ public class Customer : MonoBehaviour
                 Check_Exit();
                 break;
         }
+
+        anim.SetFloat("speed", agent.velocity.magnitude);
     }
 
     private void Check_Enter()  // OrderPoint 도착 판단
@@ -81,11 +86,25 @@ public class Customer : MonoBehaviour
         if (orderTimer <= 0f)
         {
             Debug.Log($"[{gameObject.name}] 손님 퇴장!! (시간 초과)");
-            // 감점 코드 추가
 
-            EnterExitState();
-            currentState = CustomerState.Exit;
+            // 감점 코드 추가
+            if (!isAngry)
+                StartCoroutine(Co_Angry());
         }
+    }
+
+    private IEnumerator Co_Angry()
+    {
+        isAngry = true;
+
+        // 애니메이션 실행
+        anim.SetTrigger("angry");
+        yield return null;
+        float animLength = anim.GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(animLength * 1.5f);
+
+        // 퇴장 시작
+        EnterExitState();
     }
 
     public void CompleteOrder()
@@ -103,15 +122,14 @@ public class Customer : MonoBehaviour
         OrderManager.instance.OrderClear();
 
         // 손님 상태 변경
-        currentState = CustomerState.Exit;
         SetTarget(CustomerManager.instance.exitPoint);
+        currentState = CustomerState.Exit;
     }
 
     void Check_Exit()
     {
         if (!agent.pathPending && agent.remainingDistance <= CustomerManager.instance.stopDistance)
         {
-            
             Destroy(gameObject);
         }
     }
