@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -8691558134111449596}
   - component: {fileID: 6640977610540010734}
   - component: {fileID: 969263392678384774}
+  - component: {fileID: 4934187227899582856}
   m_Layer: 0
   m_Name: topbun_low
   m_TagString: Untagged
@@ -100,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientType: 0
+  spawnTransform: {fileID: 0}
 --- !u!54 &-8691558134111449596
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -270,3 +272,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.8025286, y: 0.7028203, z: 1.802735}
   m_Center: {x: 0.000072538845, y: 0.38158536, z: -0.00017586349}
+--- !u!114 &4934187227899582856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491540523578944947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72115580717a842879d4824cb0112943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientTag: topbun_low
