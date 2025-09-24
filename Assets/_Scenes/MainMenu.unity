@@ -906,9 +906,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b485556062648ee85847a69d88cd30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rawPattyModelPrefab: {fileID: 2896389125435324988, guid: d50124f3c352b4b608567e84e4647068, type: 3}
+  rawPattyModelPrefab: {fileID: 2896389125435324988, guid: 036f720cbc3f6423e82aa92291be2c7a, type: 3}
   cookedPattyModelPrefab: {fileID: 1461888261538612911, guid: e6fba510cc27640f08ca5efd79163b67, type: 3}
-  burntPattyModelPrefab: {fileID: 8947591380214308631, guid: 4bf3903b572a843fba91321cc5900960, type: 3}
+  burntPattyModelPrefab: {fileID: 8947591380214308631, guid: ae73fdc5fa4114155aa0b4d855080616, type: 3}
   timeToCook: 3
   timeToBurn: 8
   pattyControllerPrefab: {fileID: 0}
@@ -3579,9 +3579,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b485556062648ee85847a69d88cd30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rawPattyModelPrefab: {fileID: 2896389125435324988, guid: d50124f3c352b4b608567e84e4647068, type: 3}
+  rawPattyModelPrefab: {fileID: 2896389125435324988, guid: 036f720cbc3f6423e82aa92291be2c7a, type: 3}
   cookedPattyModelPrefab: {fileID: 1461888261538612911, guid: e6fba510cc27640f08ca5efd79163b67, type: 3}
-  burntPattyModelPrefab: {fileID: 8947591380214308631, guid: 4bf3903b572a843fba91321cc5900960, type: 3}
+  burntPattyModelPrefab: {fileID: 8947591380214308631, guid: ae73fdc5fa4114155aa0b4d855080616, type: 3}
   timeToCook: 3
   timeToBurn: 8
   pattyControllerPrefab: {fileID: 0}
@@ -4277,9 +4277,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b485556062648ee85847a69d88cd30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rawPattyModelPrefab: {fileID: 2896389125435324988, guid: d50124f3c352b4b608567e84e4647068, type: 3}
+  rawPattyModelPrefab: {fileID: 2896389125435324988, guid: 036f720cbc3f6423e82aa92291be2c7a, type: 3}
   cookedPattyModelPrefab: {fileID: 1461888261538612911, guid: e6fba510cc27640f08ca5efd79163b67, type: 3}
-  burntPattyModelPrefab: {fileID: 8947591380214308631, guid: 4bf3903b572a843fba91321cc5900960, type: 3}
+  burntPattyModelPrefab: {fileID: 8947591380214308631, guid: ae73fdc5fa4114155aa0b4d855080616, type: 3}
   timeToCook: 3
   timeToBurn: 8
   pattyControllerPrefab: {fileID: 0}
@@ -6741,8 +6741,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.48430896, y: 0.012123108, z: 0.47118568}
-  m_Center: {x: -0.004503846, y: 1.0689163, z: -0.014241219}
+  m_Size: {x: 0.48430896, y: 0.06007445, z: 0.47118568}
+  m_Center: {x: -0.004503846, y: 0.5602239, z: -0.014241219}
 --- !u!1001 &458699536
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8690,9 +8690,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b485556062648ee85847a69d88cd30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rawPattyModelPrefab: {fileID: 2896389125435324988, guid: d50124f3c352b4b608567e84e4647068, type: 3}
+  rawPattyModelPrefab: {fileID: 2896389125435324988, guid: 036f720cbc3f6423e82aa92291be2c7a, type: 3}
   cookedPattyModelPrefab: {fileID: 1461888261538612911, guid: e6fba510cc27640f08ca5efd79163b67, type: 3}
-  burntPattyModelPrefab: {fileID: 8947591380214308631, guid: 4bf3903b572a843fba91321cc5900960, type: 3}
+  burntPattyModelPrefab: {fileID: 8947591380214308631, guid: ae73fdc5fa4114155aa0b4d855080616, type: 3}
   timeToCook: 3
   timeToBurn: 8
   pattyControllerPrefab: {fileID: 0}
@@ -10590,9 +10590,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b485556062648ee85847a69d88cd30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rawPattyModelPrefab: {fileID: 2896389125435324988, guid: d50124f3c352b4b608567e84e4647068, type: 3}
+  rawPattyModelPrefab: {fileID: 2896389125435324988, guid: 036f720cbc3f6423e82aa92291be2c7a, type: 3}
   cookedPattyModelPrefab: {fileID: 1461888261538612911, guid: e6fba510cc27640f08ca5efd79163b67, type: 3}
-  burntPattyModelPrefab: {fileID: 8947591380214308631, guid: 4bf3903b572a843fba91321cc5900960, type: 3}
+  burntPattyModelPrefab: {fileID: 8947591380214308631, guid: ae73fdc5fa4114155aa0b4d855080616, type: 3}
   timeToCook: 3
   timeToBurn: 8
   pattyControllerPrefab: {fileID: 0}
@@ -13365,9 +13365,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b485556062648ee85847a69d88cd30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rawPattyModelPrefab: {fileID: 2896389125435324988, guid: d50124f3c352b4b608567e84e4647068, type: 3}
+  rawPattyModelPrefab: {fileID: 2896389125435324988, guid: 036f720cbc3f6423e82aa92291be2c7a, type: 3}
   cookedPattyModelPrefab: {fileID: 1461888261538612911, guid: e6fba510cc27640f08ca5efd79163b67, type: 3}
-  burntPattyModelPrefab: {fileID: 8947591380214308631, guid: 4bf3903b572a843fba91321cc5900960, type: 3}
+  burntPattyModelPrefab: {fileID: 8947591380214308631, guid: ae73fdc5fa4114155aa0b4d855080616, type: 3}
   timeToCook: 3
   timeToBurn: 8
   pattyControllerPrefab: {fileID: 0}
@@ -19652,9 +19652,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b485556062648ee85847a69d88cd30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rawPattyModelPrefab: {fileID: 2896389125435324988, guid: d50124f3c352b4b608567e84e4647068, type: 3}
+  rawPattyModelPrefab: {fileID: 2896389125435324988, guid: 036f720cbc3f6423e82aa92291be2c7a, type: 3}
   cookedPattyModelPrefab: {fileID: 1461888261538612911, guid: e6fba510cc27640f08ca5efd79163b67, type: 3}
-  burntPattyModelPrefab: {fileID: 8947591380214308631, guid: 4bf3903b572a843fba91321cc5900960, type: 3}
+  burntPattyModelPrefab: {fileID: 8947591380214308631, guid: ae73fdc5fa4114155aa0b4d855080616, type: 3}
   timeToCook: 3
   timeToBurn: 8
   pattyControllerPrefab: {fileID: 0}
@@ -21798,9 +21798,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b485556062648ee85847a69d88cd30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rawPattyModelPrefab: {fileID: 2896389125435324988, guid: d50124f3c352b4b608567e84e4647068, type: 3}
+  rawPattyModelPrefab: {fileID: 2896389125435324988, guid: 036f720cbc3f6423e82aa92291be2c7a, type: 3}
   cookedPattyModelPrefab: {fileID: 1461888261538612911, guid: e6fba510cc27640f08ca5efd79163b67, type: 3}
-  burntPattyModelPrefab: {fileID: 8947591380214308631, guid: 4bf3903b572a843fba91321cc5900960, type: 3}
+  burntPattyModelPrefab: {fileID: 8947591380214308631, guid: ae73fdc5fa4114155aa0b4d855080616, type: 3}
   timeToCook: 3
   timeToBurn: 8
   pattyControllerPrefab: {fileID: 0}
@@ -24493,9 +24493,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b485556062648ee85847a69d88cd30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rawPattyModelPrefab: {fileID: 2896389125435324988, guid: d50124f3c352b4b608567e84e4647068, type: 3}
+  rawPattyModelPrefab: {fileID: 2896389125435324988, guid: 036f720cbc3f6423e82aa92291be2c7a, type: 3}
   cookedPattyModelPrefab: {fileID: 1461888261538612911, guid: e6fba510cc27640f08ca5efd79163b67, type: 3}
-  burntPattyModelPrefab: {fileID: 8947591380214308631, guid: 4bf3903b572a843fba91321cc5900960, type: 3}
+  burntPattyModelPrefab: {fileID: 8947591380214308631, guid: ae73fdc5fa4114155aa0b4d855080616, type: 3}
   timeToCook: 3
   timeToBurn: 8
   pattyControllerPrefab: {fileID: 0}
