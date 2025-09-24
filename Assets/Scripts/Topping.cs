@@ -7,7 +7,10 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 public class Topping : MonoBehaviour
 {
     public Ingredient ingredientType;
+    public Transform spawnTransform;
+
     private XRGrabInteractable grabInteractable;
+    private bool hasSpawned = false;
 
     void Awake()
     {
