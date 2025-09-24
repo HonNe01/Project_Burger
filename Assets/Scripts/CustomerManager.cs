@@ -106,7 +106,10 @@ public class CustomerManager : MonoBehaviour
             {
                 // 맨 앞 손님은 카운터로
                 cust.SetTarget(orderPoint);
-                cust.currentState = Customer.CustomerState.Enter;
+
+                if (cust.currentState == Customer.CustomerState.Enter ||
+                    cust.currentState == Customer.CustomerState.Wait)
+                    cust.currentState = Customer.CustomerState.Enter;
             }
             else
             {

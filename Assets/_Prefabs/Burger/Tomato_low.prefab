@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2979703904878963633}
   - component: {fileID: -4081273859679014360}
   - component: {fileID: -3477966757315039668}
+  - component: {fileID: -2778663696240379857}
   m_Layer: 0
   m_Name: Tomato_low
   m_TagString: Untagged
@@ -65,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6478536213147159724, guid: df1833d7cc0034b71b0930456615163f, type: 3}
+  - {fileID: 2100000, guid: 17a3e3ec1a9e2480a9a140b06e70c292, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -100,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientType: 0
+  spawnTransform: {fileID: 0}
 --- !u!54 &2979703904878963633
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -270,3 +272,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.801026, y: 0.17101109, z: 1.8010261}
   m_Center: {x: 0, y: 0.085505545, z: 0}
+--- !u!114 &-2778663696240379857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505061653020049676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72115580717a842879d4824cb0112943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientTag: Tomato_low

@@ -11,31 +11,34 @@ public class OrderManager : MonoBehaviour
 {
     public static OrderManager instance;
 
+    [Header(" === Order List === ")]
+    [SerializeField] List<Ingredient> order = new List<Ingredient>();
+
     [Header(" === Patty Probability === ")]
-    [Range(0f, 1f)] public float patty1Prob = 0.6f;
-    [Range(0f, 1f)] public float patty2Prob = 0.3f;
-    [Range(0f, 1f)] public float patty3Prob = 0.1f;
+    public float patty1Prob = 0.6f;
+    public float patty2Prob = 0.3f;
+    public float patty3Prob = 0.1f;
 
     [Header(" === Topping Probability === ")]
     [Header("Lettuce")]
-    [Range(0f, 1f)] public float lettuce0Prob = 0.3f;
-    [Range(0f, 1f)] public float lettuce1Prob = 0.6f;
-    [Range(0f, 1f)] public float lettuce2Prob = 0.1f;
+    public float lettuce0Prob = 0.3f;
+    public float lettuce1Prob = 0.6f;
+    public float lettuce2Prob = 0.1f;
 
     [Header("Tomato")]
-    [Range(0f, 1f)] public float tomato0Prob = 0.5f;
-    [Range(0f, 1f)] public float tomato1Prob = 0.4f;
-    [Range(0f, 1f)] public float tomato2Prob = 0.1f;
+    public float tomato0Prob = 0.5f;
+    public float tomato1Prob = 0.4f;
+    public float tomato2Prob = 0.1f;
 
     [Header("Cheese")]
-    [Range(0f, 1f)] public float cheese0Prob = 0.2f;
-    [Range(0f, 1f)] public float cheese1Prob = 0.6f;
-    [Range(0f, 1f)] public float cheese2Prob = 0.2f;
+    public float cheese0Prob = 0.2f;
+    public float cheese1Prob = 0.6f;
+    public float cheese2Prob = 0.2f;
 
     [Header("Onion")]
-    [Range(0f, 1f)] public float onion0Prob = 0.4f;
-    [Range(0f, 1f)] public float onion1Prob = 0.5f;
-    [Range(0f, 1f)] public float onion2Prob = 0.1f;
+    public float onion0Prob = 0.4f;
+    public float onion1Prob = 0.5f;
+    public float onion2Prob = 0.1f;
 
     private void Awake()
     {
@@ -49,9 +52,62 @@ public class OrderManager : MonoBehaviour
         instance = this;
     }
 
+    private void Start()
+    {
+        NormalizeTopping();
+    }
+
+    void NormalizeTopping()
+    {
+        // Patty
+        float pattySum = patty1Prob + patty2Prob + patty3Prob;
+        if (Mathf.Abs(pattySum - 1f) > 0.0001f)
+        {
+            Debug.LogWarning("[OrderManager] Patty 확률 합이 1이 아님: " + pattySum + " -> 보정");
+            patty1Prob += (1f - pattySum);
+            // 만약 보정 후 음수가 되면 0으로
+            patty1Prob = Mathf.Max(0f, patty1Prob);
+        }
+
+        // Lettuce
+        float lettuceSum = lettuce0Prob + lettuce1Prob + lettuce2Prob;
+        if (Mathf.Abs(lettuceSum - 1f) > 0.0001f)
+        {
+            Debug.LogWarning("[OrderManager] Lettuce 확률 합이 1이 아님: " + lettuceSum + " -> 보정");
+            lettuce0Prob += (1f - lettuceSum);
+            lettuce0Prob = Mathf.Max(0f, lettuce0Prob);
+        }
+
+        // Tomato
+        float tomatoSum = tomato0Prob + tomato1Prob + tomato2Prob;
+        if (Mathf.Abs(tomatoSum - 1f) > 0.0001f)
+        {
+            Debug.LogWarning("[OrderManager] Tomato 확률 합이 1이 아님: " + tomatoSum + " -> 보정");
+            tomato0Prob += (1f - tomatoSum);
+            tomato0Prob = Mathf.Max(0f, tomato0Prob);
+        }
+
+        // Cheese
+        float cheeseSum = cheese0Prob + cheese1Prob + cheese2Prob;
+        if (Mathf.Abs(cheeseSum - 1f) > 0.0001f)
+        {
+            Debug.LogWarning("[OrderManager] Cheese 확률 합이 1이 아님: " + cheeseSum + " -> 보정");
+            cheese0Prob += (1f - cheeseSum);
+            cheese0Prob = Mathf.Max(0f, cheese0Prob);
+        }
+
+        // Onion
+        float onionSum = onion0Prob + onion1Prob + onion2Prob;
+        if (Mathf.Abs(onionSum - 1f) > 0.0001f)
+        {
+            Debug.LogWarning("[OrderManager] Onion 확률 합이 1이 아님: " + onionSum + " -> 보정");
+            onion0Prob += (1f - onionSum);
+            onion0Prob = Mathf.Max(0f, onion0Prob);
+        }
+    }
+
     public List<Ingredient> Order()
     {
-        List<Ingredient> order = new List<Ingredient>();
         List<Ingredient> middle = new List<Ingredient>();
 
         // 1) 번 추가
@@ -76,6 +132,11 @@ public class OrderManager : MonoBehaviour
         order.Add(Ingredient.Bun);
 
         return order;
+    }
+
+    public void OrderClear()
+    {
+        order.Clear();
     }
 
     // 패티 갯수 선택 메소드
