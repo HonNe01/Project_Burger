@@ -16,6 +16,7 @@ public class Customer : MonoBehaviour
 
 
     [Header("주문 관련")]
+    List<Ingredient> myOrder = new List<Ingredient>();
     public bool isAngry;
     public float orderTimeLimit = 20f;
     private float orderTimer;
@@ -72,7 +73,7 @@ public class Customer : MonoBehaviour
         agent.isStopped = true;
 
         // 주문 생성
-        List<Ingredient> myOrder = OrderManager.instance.Order();
+        myOrder = OrderManager.instance.Order();
         Debug.Log($"[{gameObject.name}] 주문 시작 : " + string.Join(", ", myOrder));
 
         currentState = CustomerState.OrderWait;
