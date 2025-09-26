@@ -24,17 +24,10 @@ public class PattyController : MonoBehaviour
     [Tooltip("패티가 타는데 필요한 총 시간 (초)")]
     public float timeToBurn = 8f;
 
-    [Header("패티 리스폰 설정")]
-    [Tooltip("이 패티 컨트롤러 자체의 프리팹. 리스폰에 사용됩니다.")]
-    public GameObject pattyControllerPrefab; // 자기 자신의 프리팹을 연결해야 함
-
     private GameObject currentPattyModel; // 현재 자식으로 붙어있는, 눈에 보이는 패티 모델
     private CookingState currentState = CookingState.Raw; // 패티의 현재 상태
     private float cookingProgress = 0f;   // 그릴 위에 있었던 총 누적 시간을 저장
     private bool isOnGrill = false;       // 현재 그릴 위에 있는지 실시간으로 확인
-
-    private Vector3 initialPosition;      // 패티가 처음 생성된 위치
-    private bool hasMovedFromSpawner = false; // 처음 위치에서 벗어났는지 확인하는 플래그
 
     void Start()
     {
@@ -43,26 +36,10 @@ public class PattyController : MonoBehaviour
         {
             currentPattyModel = Instantiate(rawPattyModelPrefab, transform.position, transform.rotation, transform);
         }
-
-        // 처음 생성된 위치를 저장합니다.
-        initialPosition = transform.position;
     }
 
     void Update()
     {
-        // --- 리스폰 로직 ---
-        // 아직 스폰 위치에서 움직이지 않았고, 이 스크립트에 리스폰용 프리펩이 연결되어 있다면
-        if (!hasMovedFromSpawner && pattyControllerPrefab != null)
-        {
-            // 처음 위치에서 일정 거리 이상 벗어났는지 확인합니다.
-            if (Vector3.Distance(transform.position, initialPosition) > 0.1f)
-            {
-                hasMovedFromSpawner = true; // 다시는 이 로직이 실행되지 않도록 플래그를 true로 설정
-                StartCoroutine(RespawnPattyAfterDelay());
-            }
-        }
-
-        // --- 기존 요리 로직 ---
         // 그릴 위에 있을 때만, 그리고 아직 타지 않았을 때만 시간을 계산합니다.
         if (isOnGrill && currentState != CookingState.Burnt)
         {
@@ -85,18 +62,6 @@ public class PattyController : MonoBehaviour
             }
         }
     }
-    
-    // 1초 뒤에 새로운 패티를 원래 자리에 생성하는 코루틴
-    IEnumerator RespawnPattyAfterDelay()
-    {
-        Debug.Log("패티가 원래 위치에서 벗어났습니다. 1초 뒤 새로운 패티를 생성합니다.");
-        yield return new WaitForSeconds(1f);
-
-        // 저장해둔 처음 위치에 새로운 패티 컨트롤러를 생성합니다.
-        Instantiate(pattyControllerPrefab, initialPosition, Quaternion.identity);
-        Debug.Log("새로운 패티 생성 완료!");
-    }
-
 
     // 그릴과 물리적으로 처음 부딪혔을 때 호출됩니다.
     private void OnCollisionEnter(Collision collision)

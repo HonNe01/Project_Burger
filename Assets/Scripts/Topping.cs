@@ -5,21 +5,28 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 public class Topping : MonoBehaviour
 {
     public Ingredient ingredientType;
-    // public Transform spawnTransform; // 리스폰 로직이 없다면 이 줄은 필요 없습니다.
+
+    [Header("리스폰 설정")]
+    [Tooltip("스폰될 원본 프리팹 (자기 자신 프리팹 연결)")]
+    public GameObject toppingPrefab;
+
+    // 이 재료가 현재 어느 접시 위에 있는지 추적합니다.
+    public Plate CurrentPlate { get; set; } = null;
 
     private XRGrabInteractable grabInteractable;
-    // private bool hasSpawned = false; // 리스폰 로직이 없다면 이 줄은 필요 없습니다.
+    private bool hasSpawnedNext = false;
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
 
     void Awake()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
-
-        // Listener 추가는 Awake나 Start에서 한 번만 합니다.
         grabInteractable.selectEntered.AddListener(OnGrabbed);
         grabInteractable.selectExited.AddListener(OnReleased);
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;
     }
 
-    // 오브젝트가 파괴될 때 Listener를 제거하여 메모리 누수를 방지합니다.
     void OnDestroy()
     {
         grabInteractable.selectEntered.RemoveListener(OnGrabbed);
@@ -28,37 +35,40 @@ public class Topping : MonoBehaviour
 
     private void OnGrabbed(SelectEnterEventArgs args)
     {
-        // 잡았을 때 특별한 동작이 필요 없다면 비워두거나,
-        // Rigidbody의 isKinematic을 true로 설정하는 것도 좋은 방법입니다.
+        // 1. 만약 이 재료가 특정 접시 위에 있었다면,
+        if (CurrentPlate != null)
+        {
+            // 그 접시에서 이 재료를 제거하라고 알립니다.
+            CurrentPlate.RemoveTopping(gameObject);
+            CurrentPlate = null; // 이제 더 이상 그 접시 위가 아닙니다.
+        }
+
+        // 2. 잡았으니 물리 효과를 다시 켜줍니다.
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+            rb.useGravity = true;
+        }
+
+        // 3. 리스폰 로직
+        if (!hasSpawnedNext && toppingPrefab != null)
+        {
+            hasSpawnedNext = true;
+            Instantiate(toppingPrefab, initialPosition, initialRotation);
+        }
     }
 
     private void OnReleased(SelectExitEventArgs args)
     {
+        // 손에서 놓았을 때, 주변에 Plate가 있는지 찾아봅니다.
         Plate plate = FindObjectOfType<Plate>();
-
-        // 1. 접시를 먼저 찾고, 접시가 없다면 아무것도 하지 않습니다.
-        if (plate == null) return;
-
-        // 2. 재료가 접시 위에 놓였는지 먼저 확인합니다.
-        if (plate.IsPositionOnPlate(transform.position))
+        if (plate != null && plate.IsPositionOnPlate(transform.position))
         {
-            // 3. 성공적으로 놓였다면, AddTopping 함수를 호출합니다.
-            // AddTopping 함수 안에서 Rigidbody를 제어하므로 여기서는 아무것도 할 필요가 없습니다.
-            plate.AddTopping(gameObject, ingredientType);
+            // 만약 접시의 감지 영역 안이라면, 그 접시에 이 재료를 추가하라고 알립니다.
+            plate.AddTopping(gameObject);
         }
-        else
-        {
-            // 4. 접시 위가 아니라면, 중력을 다시 켜서 바닥에 떨어지게 합니다.
-            Rigidbody rb = GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.isKinematic = false; // isKinematic을 사용했다면 false로 변경
-                rb.useGravity = true;
-
-                // XR Interaction Toolkit이 속도를 제어하므로 굳이 0으로 만들 필요는 없습니다.
-                // rb.velocity = Vector3.zero;
-                // rb.angularVelocity = Vector3.zero;
-            }
-        }
+        // 접시 위가 아니라면, 그냥 중력에 의해 떨어집니다 (별도 처리 필요 없음).
     }
 }
+

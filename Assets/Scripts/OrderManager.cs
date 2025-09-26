@@ -4,7 +4,14 @@ using UnityEngine;
 
 public enum Ingredient
 {
-    Bun, Patty, Lettuce, Tomato, Cheese, Onion
+    None,
+    Patty,
+    Cheese,
+    Lettuce,
+    Tomato,
+    Onion,
+    TopBun,
+    BottomBun
 }
 
 public class OrderManager : MonoBehaviour
@@ -111,7 +118,7 @@ public class OrderManager : MonoBehaviour
         List<Ingredient> middle = new List<Ingredient>();
 
         // 1) 번 추가
-        order.Add(Ingredient.Bun);
+        order.Add(Ingredient.BottomBun);
 
         // 2) 패티 개수 결정
         int pattyCount = GetWeightedRandom(patty1Prob, patty2Prob, patty3Prob);
@@ -129,7 +136,7 @@ public class OrderManager : MonoBehaviour
         order.AddRange(middle);
 
         // 4) 마지막 빵
-        order.Add(Ingredient.Bun);
+        order.Add(Ingredient.TopBun);
 
         return order;
     }
