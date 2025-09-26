@@ -97,7 +97,7 @@ public class Customer : MonoBehaviour
         {
             Debug.Log($"[{gameObject.name}] 손님 퇴장!! (시간 초과)");
 
-            soundVFX.GetComponent<SoundManager>().PlaySFX("Angry");
+            soundVFX.GetComponent<SoundManager>().PlaySFX("Angry 1");
             currentState = CustomerState.NEUTRAL;
             // 감점 코드 추가
             if (!isAngry)

@@ -4447,7 +4447,7 @@ MonoBehaviour:
   sfxClips:
   - {fileID: 8300000, guid: 4808d3ba00c2b4b15b4cb722cb4e16a0, type: 3}
   - {fileID: 8300000, guid: 9f529aa92ac9741268204b9d1c65a20c, type: 3}
-  - {fileID: 8300000, guid: d8541165acdfa4d5a97a89dd05399ddb, type: 3}
+  - {fileID: 8300000, guid: d17fd020cb0544c78a0d67c58774871a, type: 3}
 --- !u!4 &456839960 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2467845069284678478, guid: 3c0b460c20e5c954d8523df4157882d1, type: 3}
