@@ -52,6 +52,9 @@ public class SoundManager : MonoBehaviour
             sfx.clip = sfxDict[clipName];
             sfx.Play();
             Destroy(sfx.gameObject, sfx.clip.length);
+            Debug.Log("Destroy");
         }
     }
 }
+
+

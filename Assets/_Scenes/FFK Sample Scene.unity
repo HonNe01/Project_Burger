@@ -4329,7 +4329,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.578
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4443,12 +4443,11 @@ MonoBehaviour:
   bgmSource: {fileID: 0}
   sfxSourcePrefab: {fileID: 7241861484605793307, guid: 3d6428f036837402ead5716bc7ac9f7f, type: 3}
   bgmClips:
-  - {fileID: 8300000, guid: 19b4d6b107b224c898dca13c596d9894, type: 3}
+  - {fileID: 8300000, guid: bfdf6d1daf3e6483f91cdfcbcdc0c12c, type: 3}
   sfxClips:
+  - {fileID: 8300000, guid: 4808d3ba00c2b4b15b4cb722cb4e16a0, type: 3}
+  - {fileID: 8300000, guid: 9f529aa92ac9741268204b9d1c65a20c, type: 3}
   - {fileID: 8300000, guid: d8541165acdfa4d5a97a89dd05399ddb, type: 3}
-  - {fileID: 8300000, guid: 826698e373d98409fafedeaf0c5879ad, type: 3}
-  - {fileID: 8300000, guid: 4df077135620c47af92c2619a1cd8ae4, type: 3}
-  - {fileID: 8300000, guid: 745e7f52abd3643118c2b3e20374ca35, type: 3}
 --- !u!4 &456839960 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2467845069284678478, guid: 3c0b460c20e5c954d8523df4157882d1, type: 3}
@@ -17482,12 +17481,12 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1616983333}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: bfdf6d1daf3e6483f91cdfcbcdc0c12c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.374
   m_Pitch: 1
   Loop: 0
   Mute: 0

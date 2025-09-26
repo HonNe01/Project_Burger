@@ -6,7 +6,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Customer : MonoBehaviour
 {
-    public enum CustomerState { Enter, Wait, Order, OrderWait, Exit }
+    public enum CustomerState { Enter, Wait, Order, OrderWait, Exit, NEUTRAL }
     public CustomerState currentState = CustomerState.Enter;
 
     public GameObject soundVFX;
@@ -83,7 +83,7 @@ public class Customer : MonoBehaviour
         myOrder = OrderManager.instance.Order();
         Debug.Log($"[{gameObject.name}] 주문 시작 : " + string.Join(", ", myOrder));
 
-        soundVFX.GetComponent<SoundManager>().PlaySFX("Mumbling");
+        soundVFX.GetComponent<SoundManager>().PlaySFX("Mumble");
 
         currentState = CustomerState.OrderWait;
         orderTimer = orderTimeLimit;
@@ -97,8 +97,8 @@ public class Customer : MonoBehaviour
         {
             Debug.Log($"[{gameObject.name}] 손님 퇴장!! (시간 초과)");
 
-            soundVFX.GetComponent<SoundManager>().PlaySFX("fail");
-
+            soundVFX.GetComponent<SoundManager>().PlaySFX("Angry");
+            currentState = CustomerState.NEUTRAL;
             // 감점 코드 추가
             if (!isAngry)
                 StartCoroutine(Co_Angry());
@@ -121,7 +121,7 @@ public class Customer : MonoBehaviour
 
     public void CompleteOrder()
     {
-        soundVFX.GetComponent<SoundManager>().PlaySFX("success");
+        soundVFX.GetComponent<SoundManager>().PlaySFX("nice");
         Debug.Log($"[{gameObject.name}] 손님 퇴장!! (주문 완료)");
         EnterExitState();
     }
