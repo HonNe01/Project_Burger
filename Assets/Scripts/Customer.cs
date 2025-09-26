@@ -6,8 +6,10 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Customer : MonoBehaviour
 {
-    public enum CustomerState { Enter, Wait, Order, OrderWait, Exit }
+    public enum CustomerState { Enter, Wait, Order, OrderWait, Exit, NEUTRAL }
     public CustomerState currentState = CustomerState.Enter;
+
+    public GameObject soundVFX;
 
     [Header("이동 관련")]
     private Animator anim;
@@ -16,6 +18,7 @@ public class Customer : MonoBehaviour
 
 
     [Header("주문 관련")]
+    List<Ingredient> myOrder = new List<Ingredient>();
     public bool isAngry;
     public float orderTimeLimit = 20f;
     private float orderTimer;
@@ -25,6 +28,11 @@ public class Customer : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+    }
+
+    void Start()
+    {
+        soundVFX = GameObject.Find("VFX");
     }
 
     void Update()
@@ -72,8 +80,10 @@ public class Customer : MonoBehaviour
         agent.isStopped = true;
 
         // 주문 생성
-        List<Ingredient> myOrder = OrderManager.instance.Order();
+        myOrder = OrderManager.instance.Order();
         Debug.Log($"[{gameObject.name}] 주문 시작 : " + string.Join(", ", myOrder));
+
+        soundVFX.GetComponent<SoundManager>().PlaySFX("Mumble");
 
         currentState = CustomerState.OrderWait;
         orderTimer = orderTimeLimit;
@@ -87,6 +97,8 @@ public class Customer : MonoBehaviour
         {
             Debug.Log($"[{gameObject.name}] 손님 퇴장!! (시간 초과)");
 
+            soundVFX.GetComponent<SoundManager>().PlaySFX("Angry 1");
+            currentState = CustomerState.NEUTRAL;
             // 감점 코드 추가
             if (!isAngry)
                 StartCoroutine(Co_Angry());
@@ -109,6 +121,7 @@ public class Customer : MonoBehaviour
 
     public void CompleteOrder()
     {
+        soundVFX.GetComponent<SoundManager>().PlaySFX("nice");
         Debug.Log($"[{gameObject.name}] 손님 퇴장!! (주문 완료)");
         EnterExitState();
     }

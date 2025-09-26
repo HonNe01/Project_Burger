@@ -1331,7 +1331,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   targetPoint: {fileID: 0}
+  isAngry: 0
   orderTimeLimit: 10
+  orderPanel: {fileID: 0}
+  toppingGroup: {fileID: 0}
+  toppingSpacing: 0.2
 --- !u!1 &5583709358732686423
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,14 +4,15 @@ using UnityEngine;
 
 public enum Ingredient
 {
-    None,
-    Patty,
-    Cheese,
-    Lettuce,
-    Tomato,
-    Onion,
-    TopBun,
-    BottomBun
+    BottomBun, Patty, Lettuce, Tomato, Cheese, Onion, TopBun
+}
+
+[System.Serializable]
+public class IngredientSprite
+{
+    public Ingredient type;
+    public GameObject spritePrefab;
+    public float topppingSpacing;
 }
 
 public class OrderManager : MonoBehaviour
@@ -20,6 +21,14 @@ public class OrderManager : MonoBehaviour
 
     [Header(" === Order List === ")]
     [SerializeField] List<Ingredient> order = new List<Ingredient>();
+
+    [Header("Order UI")]
+    [SerializeField] private GameObject orderPanel;
+    [SerializeField] private Transform toppingGroup;
+
+    [Header(" === Ingredient Prefab === ")]
+    public List<IngredientSprite> ingredientSprites;
+    private Dictionary<Ingredient, GameObject> spriteDict = new Dictionary<Ingredient, GameObject>();
 
     [Header(" === Patty Probability === ")]
     public float patty1Prob = 0.6f;
@@ -57,10 +66,19 @@ public class OrderManager : MonoBehaviour
         }
 
         instance = this;
+
+        // Dict Init
+        foreach (var entry in ingredientSprites)
+        {
+            if (!spriteDict.ContainsKey(entry.type))
+                spriteDict.Add(entry.type, entry.spritePrefab);
+        }
     }
 
     private void Start()
     {
+        orderPanel.SetActive(false);
+
         NormalizeTopping();
     }
 
@@ -141,8 +159,43 @@ public class OrderManager : MonoBehaviour
         return order;
     }
 
+    void ShowOrder()
+    {
+        float curY = 0;
+
+        // 주문 UI 생성
+        for (int i = 0; i < order.Count; i++)
+        {
+            Ingredient ing = order[i];
+            GameObject prefab = GetTopping(ing);
+            if (prefab == null) continue;
+
+            float spacing = 0f;
+            if (spriteDict.ContainsKey(ing))
+            {
+                IngredientSprite entry = ingredientSprites.Find(x => x.type == ing);
+                if (entry != null) spacing = entry.topppingSpacing;
+            }
+
+            GameObject toppingObj = Instantiate(prefab, toppingGroup);
+
+            toppingObj.transform.localPosition = new Vector3(0, curY, 0);
+            toppingObj.transform.localRotation = Quaternion.identity;
+
+            curY += spacing;
+        }
+
+        orderPanel.SetActive(true);
+    }
+
     public void OrderClear()
     {
+        foreach (Transform child in toppingGroup)
+        {
+            Destroy(child.gameObject);
+        }
+
+        orderPanel.SetActive(false);
         order.Clear();
     }
 
@@ -178,5 +231,12 @@ public class OrderManager : MonoBehaviour
             list[i] = list[randIndex];
             list[randIndex] = temp;
         }
+    }
+
+    public GameObject GetTopping(Ingredient topping)
+    {
+        if (spriteDict.ContainsKey(topping))
+            return spriteDict[topping];
+        return null;
     }
 }
