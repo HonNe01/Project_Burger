@@ -9,6 +9,8 @@ public class Customer : MonoBehaviour
     public enum CustomerState { Enter, Wait, Order, OrderWait, Exit }
     public CustomerState currentState = CustomerState.Enter;
 
+    public GameObject soundVFX;
+
     [Header("이동 관련")]
     private Animator anim;
     private NavMeshAgent agent;
@@ -26,6 +28,11 @@ public class Customer : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+    }
+
+    void Start()
+    {
+        soundVFX = GameObject.Find("VFX");
     }
 
     void Update()
@@ -76,6 +83,8 @@ public class Customer : MonoBehaviour
         myOrder = OrderManager.instance.Order();
         Debug.Log($"[{gameObject.name}] 주문 시작 : " + string.Join(", ", myOrder));
 
+        soundVFX.GetComponent<SoundManager>().PlaySFX("Mumbling");
+
         currentState = CustomerState.OrderWait;
         orderTimer = orderTimeLimit;
     }
@@ -87,6 +96,8 @@ public class Customer : MonoBehaviour
         if (orderTimer <= 0f)
         {
             Debug.Log($"[{gameObject.name}] 손님 퇴장!! (시간 초과)");
+
+            soundVFX.GetComponent<SoundManager>().PlaySFX("fail");
 
             // 감점 코드 추가
             if (!isAngry)
@@ -110,6 +121,7 @@ public class Customer : MonoBehaviour
 
     public void CompleteOrder()
     {
+        soundVFX.GetComponent<SoundManager>().PlaySFX("success");
         Debug.Log($"[{gameObject.name}] 손님 퇴장!! (주문 완료)");
         EnterExitState();
     }

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager Instance;
-
     [Header("BGM 오디오 소스")]
     public AudioSource bgmSource;
 
@@ -21,15 +19,6 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
-        // 싱글톤
-        if (Instance == null) {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        } else {
-            Destroy(gameObject);
-            return;
-        }
-
         // 오디오 클립 딕셔너리 초기화
         foreach (AudioClip clip in bgmClips)
             bgmDict[clip.name] = clip;
