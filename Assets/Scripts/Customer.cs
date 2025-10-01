@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum CustomerType { Default, Kid, Girl }
+
 [RequireComponent(typeof(NavMeshAgent))]
 public class Customer : MonoBehaviour
 {
-    public enum CustomerState { Enter, Wait, Order, OrderWait, Exit, NEUTRAL }
+    public CustomerType customerType;
+    public enum CustomerState { Enter, Wait, Order, OrderWait, Exit }
     public CustomerState currentState = CustomerState.Enter;
-
-    public GameObject soundVFX;
 
     [Header("이동 관련")]
     private Animator anim;
@@ -32,7 +33,7 @@ public class Customer : MonoBehaviour
 
     void Start()
     {
-        soundVFX = GameObject.Find("VFX");
+        
     }
 
     void Update()
@@ -83,7 +84,7 @@ public class Customer : MonoBehaviour
         myOrder = OrderManager.instance.Order();
         Debug.Log($"[{gameObject.name}] 주문 시작 : " + string.Join(", ", myOrder));
 
-        soundVFX.GetComponent<SoundManager>().PlaySFX("Man");
+        SoundManager.instance.PlayCustomerSFX(SoundManager.SFX.Order, customerType);
 
         currentState = CustomerState.OrderWait;
         orderTimer = orderTimeLimit;
@@ -97,8 +98,6 @@ public class Customer : MonoBehaviour
         {
             Debug.Log($"[{gameObject.name}] 손님 퇴장!! (시간 초과)");
 
-            soundVFX.GetComponent<SoundManager>().PlaySFX("Angry 1");
-            currentState = CustomerState.NEUTRAL;
             // 감점 코드 추가
             if (!isAngry)
                 StartCoroutine(Co_Angry());
@@ -111,6 +110,8 @@ public class Customer : MonoBehaviour
 
         // 애니메이션 실행
         anim.SetTrigger("angry");
+        SoundManager.instance.PlayCustomerSFX(SoundManager.SFX.Angry, customerType);
+
         yield return null;
         float animLength = anim.GetCurrentAnimatorStateInfo(0).length;
         yield return new WaitForSeconds(animLength * 1.5f);
@@ -121,7 +122,7 @@ public class Customer : MonoBehaviour
 
     public void CompleteOrder()
     {
-        soundVFX.GetComponent<SoundManager>().PlaySFX("success");
+        SoundManager.instance.PlayCustomerSFX(SoundManager.SFX.Good, customerType);
         Debug.Log($"[{gameObject.name}] 손님 퇴장!! (주문 완료)");
         EnterExitState();
     }

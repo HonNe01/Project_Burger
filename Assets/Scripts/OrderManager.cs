@@ -12,7 +12,7 @@ public class IngredientSprite
 {
     public Ingredient type;
     public GameObject spritePrefab;
-    public float topppingSpacing;
+    public float toppingSpacing;
 }
 
 public class OrderManager : MonoBehaviour
@@ -133,6 +133,7 @@ public class OrderManager : MonoBehaviour
 
     public List<Ingredient> Order()
     {
+        order.Clear();
         List<Ingredient> middle = new List<Ingredient>();
 
         // 1) 번 추가
@@ -155,6 +156,7 @@ public class OrderManager : MonoBehaviour
 
         // 4) 마지막 빵
         order.Add(Ingredient.TopBun);
+        ShowOrder();
 
         return order;
     }
@@ -174,7 +176,7 @@ public class OrderManager : MonoBehaviour
             if (spriteDict.ContainsKey(ing))
             {
                 IngredientSprite entry = ingredientSprites.Find(x => x.type == ing);
-                if (entry != null) spacing = entry.topppingSpacing;
+                if (entry != null) spacing = entry.toppingSpacing;
             }
 
             GameObject toppingObj = Instantiate(prefab, toppingGroup);

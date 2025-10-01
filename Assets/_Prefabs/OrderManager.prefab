@@ -50,25 +50,25 @@ MonoBehaviour:
   ingredientSprites:
   - type: 0
     spritePrefab: {fileID: 2793744714722329222, guid: d2b7f5ecab56f498d9ad42f1f4350f20, type: 3}
-    topppingSpacing: 0.08
+    toppingSpacing: 0.07
   - type: 1
     spritePrefab: {fileID: 1461888261538612911, guid: e25822fbbee4a4e01a79e603939c612a, type: 3}
-    topppingSpacing: 0.1
+    toppingSpacing: 0.07
   - type: 4
     spritePrefab: {fileID: 6206244551399176566, guid: ddbf15d91b9814debbe534200fe3e603, type: 3}
-    topppingSpacing: 0
+    toppingSpacing: 0.03
   - type: 2
     spritePrefab: {fileID: 4766762238791039797, guid: 841e64b2ad1b94cb09200878d5638ee8, type: 3}
-    topppingSpacing: 0.02
+    toppingSpacing: 0.03
   - type: 3
     spritePrefab: {fileID: 505061653020049676, guid: b358755b4c6b54f26ac7c4b025f17875, type: 3}
-    topppingSpacing: 0.03
+    toppingSpacing: 0.03
   - type: 5
     spritePrefab: {fileID: 4766762238791039797, guid: 4e307c030b02141d6858f8502b2f9f37, type: 3}
-    topppingSpacing: 0.03
+    toppingSpacing: 0.03
   - type: 6
     spritePrefab: {fileID: 491540523578944947, guid: b2210409343ed4867ba25e287d8adb46, type: 3}
-    topppingSpacing: 0
+    toppingSpacing: 0
   patty1Prob: 0.6
   patty2Prob: 0.3
   patty3Prob: 0.1

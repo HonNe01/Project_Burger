@@ -142,6 +142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d12ee00753a9549f19d2cad69e1b125c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  customerType: 1
   currentState: 0
   targetPoint: {fileID: 0}
+  isAngry: 0
   orderTimeLimit: 10

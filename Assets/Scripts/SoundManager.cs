@@ -3,56 +3,140 @@ using System.Collections.Generic;
 
 public class SoundManager : MonoBehaviour
 {
-    [Header("BGM 오디오 소스")]
-    public AudioSource bgmSource;
+    public static SoundManager instance;
 
-    [Header("효과음 오디오 소스 (여러개 재생 가능)")]
-    public AudioSource sfxSourcePrefab;  // 프리팹으로 미리 등록
-    private List<AudioSource> sfxSources = new List<AudioSource>();
+    [Header(" # BGM")]
+    public AudioClip bgmClip;
+    public float bgmVolume;
+    AudioSource bgmPlayer;
 
-    [Header("오디오 클립 목록")]
-    public AudioClip[] bgmClips;
+    [Header(" # SFX")]
     public AudioClip[] sfxClips;
+    public float sfxVolume;
+    public int channels;
+    AudioSource[] sfxPlayers;
 
-    private Dictionary<string, AudioClip> bgmDict = new Dictionary<string, AudioClip>();
-    private Dictionary<string, AudioClip> sfxDict = new Dictionary<string, AudioClip>();
+    int channelsIndex;
+
+    public enum SFX
+    {
+        Select, Success, Patty, Patty_Burn,
+        Order, Good, Angry,
+        Order_Kid, Good_Kid, Angry_Kid,
+        Order_Girl, Good_Girl, Angry_Girl
+    }
 
     void Awake()
     {
-        // 오디오 클립 딕셔너리 초기화
-        foreach (AudioClip clip in bgmClips)
-            bgmDict[clip.name] = clip;
+        // 인스턴스 초기화
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
 
-        foreach (AudioClip clip in sfxClips)
-            sfxDict[clip.name] = clip;
+            return;
+        }
+
+        instance = this;
     }
 
-    // ===== BGM =====
-    public void PlayBGM(string clipName, bool loop = true)
+    void Start()
     {
-        if (bgmDict.ContainsKey(clipName))
+        Init();
+    }
+
+    void Init()
+    {
+        // BGM Init
+        GameObject bgmObject = new GameObject("BGM Player");
+        bgmObject.transform.parent = transform;
+        bgmPlayer = bgmObject.AddComponent<AudioSource>();
+        bgmPlayer.playOnAwake = false;
+        bgmPlayer.loop = true;
+        bgmPlayer.volume = bgmVolume;
+        bgmPlayer.clip = bgmClip;
+
+        // SFX Init
+        GameObject sfxObject = new GameObject("SFX Player");
+        sfxObject.transform.parent = transform;
+        sfxPlayers = new AudioSource[channels];
+
+        for (int index = 0; index < sfxPlayers.Length; index++)
         {
-            bgmSource.clip = bgmDict[clipName];
-            bgmSource.loop = loop;
-            bgmSource.Play();
+            sfxPlayers[index] = sfxObject.AddComponent<AudioSource>();
+            sfxPlayers[index].playOnAwake = false;
+            sfxPlayers[index].volume = sfxVolume;
         }
     }
 
-    public void StopBGM()
+    // ===== BGM =====
+    public void PlayBGM(bool isPlay)
     {
-        bgmSource.Stop();
+        if (isPlay)
+            bgmPlayer.Play();
+        else
+            bgmPlayer.Stop();
+    }
+
+    public void StopSFX(SFX sfx)
+    {
+        AudioClip target = sfxClips[(int)sfx];
+
+        for (int i = 0; i < sfxPlayers.Length; i++)
+        {
+            var sfxPlayer = sfxPlayers[i];
+            if (sfxPlayer.isPlaying && sfxPlayer.clip == target)
+            {
+                sfxPlayer.Stop();
+            }
+        }
     }
 
     // ===== SFX =====
-    public void PlaySFX(string clipName)
+    public void PlaySFX(SFX sfx)
     {
-        if (sfxDict.ContainsKey(clipName))
+        for (int index = 0; index < sfxPlayers.Length; index++)
         {
-            AudioSource sfx = Instantiate(sfxSourcePrefab, transform);
-            sfx.clip = sfxDict[clipName];
-            sfx.Play();
-            Destroy(sfx.gameObject, sfx.clip.length);
-            Debug.Log("Destroy");
+            int loopIndex = (index + channelsIndex) % sfxPlayers.Length;
+
+            if (sfxPlayers[loopIndex].isPlaying)
+                continue;
+
+            int ranIndex = 0;
+            /*
+            if (sfx == SFX.etc || sfx == SFX.etc) 
+            {
+                ranIndex = Random.Range(0, 2);
+            }
+            */
+
+            channelsIndex = loopIndex;
+            sfxPlayers[loopIndex].clip = sfxClips[(int)sfx + ranIndex];
+            sfxPlayers[loopIndex].Play();
+
+            break;
+        }
+    }
+
+    public void PlayCustomerSFX(SFX sfx, CustomerType type)
+    {
+        int soundOffset = 0;
+
+        switch (type)
+        {
+            case CustomerType.Default:
+                soundOffset = 0;
+                break;
+            case CustomerType.Kid:
+                soundOffset = 3;
+                break;
+            case CustomerType.Girl:
+                soundOffset = 6;
+                break;
+        }
+        
+        if ((int)sfx < sfxClips.Length)
+        {
+            PlaySFX((SFX)((int)sfx + soundOffset));
         }
     }
 }
