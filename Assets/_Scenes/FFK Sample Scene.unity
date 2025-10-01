@@ -4448,6 +4448,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4808d3ba00c2b4b15b4cb722cb4e16a0, type: 3}
   - {fileID: 8300000, guid: 9f529aa92ac9741268204b9d1c65a20c, type: 3}
   - {fileID: 8300000, guid: d17fd020cb0544c78a0d67c58774871a, type: 3}
+  - {fileID: 8300000, guid: 4f1e7c33d74554885872c5bb2db5d69a, type: 3}
+  - {fileID: 8300000, guid: 71e962f26083a42ff8ab5e860f789ff7, type: 3}
+  - {fileID: 8300000, guid: 57fabe6aceac94b249d69ec4de63fa5f, type: 3}
+  - {fileID: 8300000, guid: 52346c9f1d5c54e51b584dbd49edf702, type: 3}
+  - {fileID: 8300000, guid: 86fe60e0c36d448018a6b3d0621eb55a, type: 3}
+  - {fileID: 8300000, guid: 745e7f52abd3643118c2b3e20374ca35, type: 3}
 --- !u!4 &456839960 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2467845069284678478, guid: 3c0b460c20e5c954d8523df4157882d1, type: 3}
@@ -23752,8 +23758,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25d090eb60da64a7a85a084166d936b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stackOrigin: {fileID: 0}
-  heightStep: 0.05
+  plateCenter: {fileID: 0}
+  plateTrigger: {fileID: 0}
 --- !u!1001 &2138057627
 PrefabInstance:
   m_ObjectHideFlags: 0

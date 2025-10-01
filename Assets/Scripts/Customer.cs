@@ -83,7 +83,7 @@ public class Customer : MonoBehaviour
         myOrder = OrderManager.instance.Order();
         Debug.Log($"[{gameObject.name}] 주문 시작 : " + string.Join(", ", myOrder));
 
-        soundVFX.GetComponent<SoundManager>().PlaySFX("Mumble");
+        soundVFX.GetComponent<SoundManager>().PlaySFX("Man");
 
         currentState = CustomerState.OrderWait;
         orderTimer = orderTimeLimit;
@@ -121,7 +121,7 @@ public class Customer : MonoBehaviour
 
     public void CompleteOrder()
     {
-        soundVFX.GetComponent<SoundManager>().PlaySFX("nice");
+        soundVFX.GetComponent<SoundManager>().PlaySFX("success");
         Debug.Log($"[{gameObject.name}] 손님 퇴장!! (주문 완료)");
         EnterExitState();
     }
