@@ -92,13 +92,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1461888261538612911}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d3717fc9671e4254a680b8f6cba9507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientType: 1
-  spawnTransform: {fileID: 0}
+  toppingPrefab: {fileID: 1461888261538612911}
+  isRespawnSource: 1
+  respawnThreshold: 0.2
 --- !u!65 &-5633301523848323186
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -116,7 +118,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1.7670666, y: 0.310819, z: 1.7670666}
   m_Center: {x: 0, y: 0.20690529, z: 0}

@@ -99,8 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d3717fc9671e4254a680b8f6cba9507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toppingPrefab: {fileID: 491540523578944947}
   ingredientType: 0
-  spawnTransform: {fileID: 0}
+  isRespawnSource: 1
+  respawnThreshold: 0.2
 --- !u!54 &-8691558134111449596
 Rigidbody:
   m_ObjectHideFlags: 0
