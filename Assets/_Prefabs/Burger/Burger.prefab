@@ -100,7 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientType: 0
-  spawnTransform: {fileID: 0}
+  toppingPrefab: {fileID: 0}
+  isRespawnSource: 1
+  respawnThreshold: 0.2
 --- !u!54 &5857098463788727248
 Rigidbody:
   m_ObjectHideFlags: 0
