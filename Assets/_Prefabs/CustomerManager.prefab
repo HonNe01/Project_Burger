@@ -49,14 +49,15 @@ MonoBehaviour:
   - {fileID: 1228815849030776254, guid: cfa3616f194c140208f9bc7d6dd9b676, type: 3}
   - {fileID: 4843328033091409256, guid: c509dd378d4514873a8a7bd584043b2f, type: 3}
   - {fileID: 9135189695448661818, guid: 0e21fb9eabab64b61b5bf89ecc4986fc, type: 3}
-  - {fileID: 31736035156423869, guid: d69ce0961993f4763b5e0e583c490e77, type: 3}
-  - {fileID: 4377917735626974154, guid: c5c501dc15e3d48c0b39acb8b6cdf4f5, type: 3}
-  - {fileID: 1683243001068976468, guid: 63c1b1330393941b48978db171d27f65, type: 3}
   - {fileID: 6394678709001958461, guid: 8f3e67555094c4de4aa6aa580fdecf68, type: 3}
+  - {fileID: 1683243001068976468, guid: 63c1b1330393941b48978db171d27f65, type: 3}
+  - {fileID: 4377917735626974154, guid: c5c501dc15e3d48c0b39acb8b6cdf4f5, type: 3}
+  - {fileID: 31736035156423869, guid: d69ce0961993f4763b5e0e583c490e77, type: 3}
+  stopDistance: 0.3
   spawnPoint: {fileID: 0}
   orderPoint: {fileID: 0}
   exitPoint: {fileID: 0}
   easySpawnInterval: {x: 15, y: 20}
   hardSpawnInterval: {x: 10, y: 12}
   hardMode: 0
-  queueSpacing: 3
+  queueSpacing: 2
