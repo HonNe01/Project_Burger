@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Billboard : MonoBehaviour
 {
+    [Header("Main Camera")]
     public Transform target;
 
     void Start()
@@ -19,7 +18,6 @@ public class Billboard : MonoBehaviour
         if (target == null) return;
 
         Vector3 dir = transform.position - target.position;
-        dir.y = 0f;
 
         if (dir.sqrMagnitude > 0.001f)
         {

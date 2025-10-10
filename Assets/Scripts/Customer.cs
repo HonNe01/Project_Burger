@@ -83,16 +83,20 @@ public class Customer : MonoBehaviour
         // 주문 생성
         myOrder = OrderManager.instance.Order();
         Debug.Log($"[{gameObject.name}] 주문 시작 : " + string.Join(", ", myOrder));
-
         SoundManager.instance.PlayCustomerSFX(SoundManager.SFX.Order, customerType);
 
         currentState = CustomerState.OrderWait;
         orderTimer = orderTimeLimit;
+
+        OrderManager.instance.SetOrderTime(0f);
     }
 
     void UpdateOrderState()
     {
         orderTimer -= Time.deltaTime;
+
+        float ratio = (orderTimeLimit - orderTimer) / orderTimeLimit;
+        OrderManager.instance.SetOrderTime(ratio);
 
         if (orderTimer <= 0f)
         {

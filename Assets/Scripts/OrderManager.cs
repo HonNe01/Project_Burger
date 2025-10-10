@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum Ingredient
 {
@@ -24,16 +25,20 @@ public class OrderManager : MonoBehaviour
 
     [Header("Order UI")]
     [SerializeField] private GameObject orderPanel;
+    [SerializeField] private Image orderTimeImage;
     [SerializeField] private Transform toppingGroup;
+
 
     [Header(" === Ingredient Prefab === ")]
     public List<IngredientSprite> ingredientSprites;
     private Dictionary<Ingredient, GameObject> spriteDict = new Dictionary<Ingredient, GameObject>();
 
+
     [Header(" === Patty Probability === ")]
     public float patty1Prob = 0.6f;
     public float patty2Prob = 0.3f;
     public float patty3Prob = 0.1f;
+
 
     [Header(" === Topping Probability === ")]
     [Header("Lettuce")]
@@ -187,7 +192,15 @@ public class OrderManager : MonoBehaviour
             curY += spacing;
         }
 
+        SetOrderTime(0f);
         orderPanel.SetActive(true);
+    }
+
+    public void SetOrderTime(float ratio)
+    {
+        if (orderTimeImage == null) return;
+
+        orderTimeImage.fillAmount = Mathf.Clamp01(ratio);
     }
 
     public void OrderClear()
@@ -198,6 +211,7 @@ public class OrderManager : MonoBehaviour
         }
 
         orderPanel.SetActive(false);
+        SetOrderTime(0f);
         order.Clear();
     }
 
