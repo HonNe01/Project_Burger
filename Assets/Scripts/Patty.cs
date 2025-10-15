@@ -22,6 +22,8 @@ public class Patty : MonoBehaviour
 
     private XRGrabInteractable grabInteractable;
 
+    private AudioSource bakingSound;
+
     void Awake()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
@@ -51,6 +53,7 @@ public class Patty : MonoBehaviour
         if (isOnGrill)
         {
             isOnGrill = false;
+            StopBakingSound();
             Debug.Log("그릴에서 패티를 집었습니다. 시간 측정을 멈춥니다.");
         }
     }
@@ -81,6 +84,8 @@ public class Patty : MonoBehaviour
             {
                 currentState = CookingState.Burnt;
                 ReplaceModel(burntPattyModelPrefab);
+
+                SoundManager.instance.PlaySFX(SoundManager.SFX.Patty_Burn);
                 Debug.Log($"누적 {timeToBurn}초 → 탄 패티로 변경!");
             }
         }
@@ -92,6 +97,8 @@ public class Patty : MonoBehaviour
         {
             isOnGrill = true;
             Debug.Log($"그릴에 닿음 → 요리 시작 (현재 {cookingProgress:F1}초)");
+
+            StartBakingSound();
         }
         else if (collision.gameObject.CompareTag("Trash"))
         {
@@ -105,6 +112,7 @@ public class Patty : MonoBehaviour
         if (collision.gameObject.CompareTag("Grill"))
         {
             isOnGrill = false;
+            StopBakingSound();
             Debug.Log($"그릴에서 떨어짐 → 요리 중단 (현재 {cookingProgress:F1}초)");
         }
     }
@@ -123,4 +131,26 @@ public class Patty : MonoBehaviour
         currentPattyModel.transform.localPosition = Vector3.zero;
         currentPattyModel.transform.localRotation = Quaternion.identity;
     }
+
+
+    private void StartBakingSound()
+    {
+        if (bakingSound == null)
+        {
+            bakingSound = gameObject.AddComponent<AudioSource>();
+            bakingSound.clip = SoundManager.instance.sfxClips[(int)SoundManager.SFX.Patty];
+            bakingSound.loop = true;
+            bakingSound.volume = SoundManager.instance.sfxVolume;
+        }
+
+        if (!bakingSound.isPlaying)
+            bakingSound.Play();
+    }
+
+    private void StopBakingSound()
+    {
+        if (bakingSound != null && bakingSound.isPlaying)
+            bakingSound.Stop();
+    }
 }
+
