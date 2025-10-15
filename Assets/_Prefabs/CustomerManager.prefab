@@ -45,14 +45,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   customerPrefabs:
-  - {fileID: 5516404325761119518, guid: 763361c9ed87846c49b2d6ba0302788d, type: 3}
-  - {fileID: 1228815849030776254, guid: cfa3616f194c140208f9bc7d6dd9b676, type: 3}
-  - {fileID: 4843328033091409256, guid: c509dd378d4514873a8a7bd584043b2f, type: 3}
-  - {fileID: 9135189695448661818, guid: 0e21fb9eabab64b61b5bf89ecc4986fc, type: 3}
-  - {fileID: 6394678709001958461, guid: 8f3e67555094c4de4aa6aa580fdecf68, type: 3}
-  - {fileID: 1683243001068976468, guid: 63c1b1330393941b48978db171d27f65, type: 3}
-  - {fileID: 4377917735626974154, guid: c5c501dc15e3d48c0b39acb8b6cdf4f5, type: 3}
-  - {fileID: 31736035156423869, guid: d69ce0961993f4763b5e0e583c490e77, type: 3}
+  - {fileID: 5139666920524405419, guid: 68449bdc2fe089140a9fa41a51921e02, type: 3}
+  - {fileID: 5227831390482902109, guid: fc4174834ee7f204d90018522879a07d, type: 3}
+  - {fileID: 6122980826077399046, guid: d325ed8e4943f0846b6c645edd74fb3b, type: 3}
+  - {fileID: 8798113314919531519, guid: 04f97845abb19db42a95f48d8ccf6a71, type: 3}
+  - {fileID: 5624658543474617509, guid: 9f391bd9d71fbca48a54f6e4c427491b, type: 3}
+  - {fileID: 6332122057602769420, guid: 1e674e8dff5b5fd42b4413dda694ff04, type: 3}
+  - {fileID: 9221342930631031818, guid: 0b161aeecf94b6740952dca9ce8860b7, type: 3}
   stopDistance: 0.3
   spawnPoint: {fileID: 0}
   orderPoint: {fileID: 0}
@@ -60,4 +59,4 @@ MonoBehaviour:
   easySpawnInterval: {x: 15, y: 20}
   hardSpawnInterval: {x: 10, y: 12}
   hardMode: 0
-  queueSpacing: 2
+  queueSpacing: 1.5

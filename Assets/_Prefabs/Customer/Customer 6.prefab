@@ -9,6 +9,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 5558dc79d0852db43b267dac26e05346, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5558dc79d0852db43b267dac26e05346, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5558dc79d0852db43b267dac26e05346, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5558dc79d0852db43b267dac26e05346, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -48,6 +60,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5558dc79d0852db43b267dac26e05346, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 798674304823727400, guid: 5558dc79d0852db43b267dac26e05346, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -85,7 +101,7 @@ Animator:
   m_GameObject: {fileID: 9221342930631031818}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 167a824b67c0e7540b1ca8a87fb757fd, type: 2}
+  m_Controller: {fileID: 9100000, guid: 84684403f60ac475f86a40b988211290, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -130,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d12ee00753a9549f19d2cad69e1b125c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customerType: 0
+  customerType: 2
   currentState: 0
   targetPoint: {fileID: 0}
   isAngry: 0
