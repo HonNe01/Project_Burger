@@ -4,46 +4,46 @@ using System.Collections.Generic;
 
 public class Plate : MonoBehaviour
 {
+    [Header("Plate Setting")]
     [Tooltip("재료가 쌓이기 시작할 중심 위치")]
     public Transform plateCenter;
-
     [Tooltip("재료가 접시 위에 있는지 판별할 감지 영역")]
     public Collider plateTrigger;
 
-    private readonly List<GameObject> stackedToppings = new List<GameObject>();
+    private List<GameObject> stackedToppings = new List<GameObject>();
 
-    // 접시 위에 있는 위치인지 확인
+    [Header("Order Setting")]
+    [SerializeField] private Customer curCustomer;
+    public void SetCustomer(Customer c) => curCustomer = c;
+    private readonly List<Ingredient> _tempSeq = new();
+
     public bool IsPositionOnPlate(Vector3 position)
     {
         if (plateTrigger == null) return false;
         return plateTrigger.bounds.Contains(position);
     }
 
-    // 재료 추가
     public void AddTopping(GameObject toppingObj)
     {
-        if (toppingObj == null || stackedToppings.Contains(toppingObj)) return;
+        Topping topping = toppingObj.GetComponent<Topping>();
+        if (topping == null || stackedToppings.Contains(toppingObj)) return;
 
-        // Topping 또는 Patty 스크립트를 모두 인식 가능하게 처리
-        var topping = toppingObj.GetComponent<Topping>();
-        var patty = toppingObj.GetComponent<Patty>();
-
-        if (topping != null) topping.CurrentPlate = this;
-        if (patty != null) patty.CurrentPlate = this;
-
+        topping.CurrentPlate = this;
         stackedToppings.Add(toppingObj);
         ReStackAllToppings();
-
-        Debug.Log($"[Plate] {toppingObj.name} 추가됨. 현재 {stackedToppings.Count}개 쌓임.");
+        Debug.Log($"[Plate] {topping.ingredientType} 추가됨. 현재 {stackedToppings.Count}개 쌓임.");
     }
 
-    // 재료 제거
     public void RemoveTopping(GameObject toppingObj)
     {
         if (stackedToppings.Contains(toppingObj))
         {
+            Topping topping = toppingObj.GetComponent<Topping>();
+            Debug.Log($"[Plate] {topping.ingredientType} 제거됨.");
             stackedToppings.Remove(toppingObj);
 
+            // --- 여기가 수정된 부분입니다 ---
+            // 제거된 재료의 물리 효과를 즉시 다시 켜줍니다.
             Rigidbody rb = toppingObj.GetComponent<Rigidbody>();
             if (rb != null)
             {
@@ -51,42 +51,37 @@ public class Plate : MonoBehaviour
                 rb.useGravity = true;
             }
 
+            // 남은 재료들을 다시 정렬합니다.
             ReStackAllToppings();
-
-            Debug.Log($"[Plate] {toppingObj.name} 제거됨. 현재 {stackedToppings.Count}개 남음.");
         }
     }
 
-    // 전체 재정렬
     private void ReStackAllToppings()
     {
         float currentStackHeight = 0f;
 
         foreach (GameObject toppingObj in stackedToppings)
         {
-            if (toppingObj == null) continue;
-
             Rigidbody rb = toppingObj.GetComponent<Rigidbody>();
             if (rb != null)
             {
+                // 쌓여있는 동안에는 물리 효과를 끕니다.
                 rb.isKinematic = true;
                 rb.useGravity = false;
             }
 
             Collider col = toppingObj.GetComponent<Collider>();
-            if (col == null) continue;
+            float height = col != null ? col.bounds.size.y : 0.1f;
 
-            float height = col.bounds.size.y;
-            float pivotOffset = toppingObj.transform.position.y - col.bounds.min.y;
-            Vector3 targetPos = plateCenter.position + new Vector3(0, currentStackHeight + pivotOffset, 0);
+            float pivotToBottomOffset = toppingObj.transform.position.y - col.bounds.min.y;
+            Vector3 targetPos = plateCenter.position + new Vector3(0, currentStackHeight + pivotToBottomOffset, 0);
 
-            StartCoroutine(SmoothMove(toppingObj.transform, targetPos, plateCenter.rotation, 0.15f));
+            StartCoroutine(SmoothMove(toppingObj.transform, targetPos, plateCenter.rotation, 0.2f));
 
             currentStackHeight += height;
         }
     }
 
-    // 부드러운 이동 (정렬 애니메이션)
     private IEnumerator SmoothMove(Transform obj, Vector3 targetPos, Quaternion targetRot, float duration)
     {
         Vector3 startPos = obj.position;
@@ -96,16 +91,106 @@ public class Plate : MonoBehaviour
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / duration);
-            t = t * t * (3f - 2f * t); // smoothstep
+            float t = elapsed / duration;
+            t = t * t * (3f - 2f * t); // ease-out
 
             obj.position = Vector3.Lerp(startPos, targetPos, t);
             obj.rotation = Quaternion.Slerp(startRot, targetRot, t);
-
             yield return null;
         }
 
         obj.position = targetPos;
         obj.rotation = targetRot;
+    }
+
+    public IReadOnlyList<Ingredient> GetStackSequence()     // 재료 확인
+    {
+        _tempSeq.Clear();
+
+        foreach (var go in stackedToppings)
+        {
+            var t = go.GetComponent<Topping>();
+
+            if (t != null)
+            {
+                _tempSeq.Add(t.ingredientType);
+            }
+        }
+
+        return _tempSeq;
+    }
+
+    private bool IsSameOrder(IReadOnlyList<Ingredient> expected, IReadOnlyList<Ingredient> actual)  // 주문과 재료 비교
+    {
+        if (expected == null || actual == null) return false;
+        if (expected.Count != actual.Count) return false;
+
+        for (int i = 0; i < expected.Count; i++)
+        {
+            if (expected[i] != actual[i]) return false;
+        }
+
+        return true;
+    }
+
+    public void CompleteOrder()                             // 주문 제작 완료
+    {
+        var expected = OrderManager.instance?.GetCurrentOrder();
+        var actual = GetStackSequence();
+
+        if (expected == null || expected.Count == 0)
+        {
+            Debug.LogWarning("[Plate] 현재 주문이 없습니다!");
+
+            return;
+        }
+
+        bool ok = IsSameOrder(expected, actual);
+
+        if (ok)
+        {
+            Debug.Log("[Plate] 서빙 성공!");
+
+            SoundManager.instance?.PlayCustomerSFX(SoundManager.SFX.Success, curCustomer != null ? curCustomer.customerType : CustomerType.Default);
+            curCustomer?.CompleteOrder();
+        }
+        else
+        {
+            Debug.LogWarning("[Plate] 서빙 실패, 주문과 다릅니다!");
+
+            SoundManager.instance?.PlayCustomerSFX(SoundManager.SFX.Success, curCustomer != null ? curCustomer.customerType : CustomerType.Default);
+            curCustomer?.CompleteOrder();
+        }
+
+        // 도마 정리
+        ClearPlate();
+    }
+
+    public void ClearPlate()                // 도마 초기화
+    {
+        foreach (var go in stackedToppings)
+        {
+            if (go == null) continue;
+
+            var rb = go.GetComponent<Rigidbody>();
+            var coll = go.GetComponent<Collider>();
+
+            if (rb != null)
+            {
+                rb.isKinematic = false;
+                rb.useGravity = true;
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
+
+            if (coll != null)
+            {
+                coll.enabled = true;
+            }
+
+            Destroy(go);
+        }
+
+        stackedToppings.Clear();
     }
 }

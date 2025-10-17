@@ -22,6 +22,7 @@ public class OrderManager : MonoBehaviour
 
     [Header(" === Order List === ")]
     [SerializeField] List<Ingredient> order = new List<Ingredient>();
+    public Customer currentCustomer;        // 현재 주문 손님
 
     [Header("Order UI")]
     [SerializeField] private GameObject orderPanel;
@@ -136,9 +137,11 @@ public class OrderManager : MonoBehaviour
         }
     }
 
-    public List<Ingredient> Order()
+    public List<Ingredient> Order(Customer customer)         // 주문 생성
     {
         order.Clear();
+        currentCustomer = null;
+        currentCustomer = customer;
         List<Ingredient> middle = new List<Ingredient>();
 
         // 1) 번 추가
@@ -166,7 +169,12 @@ public class OrderManager : MonoBehaviour
         return order;
     }
 
-    void ShowOrder()
+    public IReadOnlyList<Ingredient> GetCurrentOrder()
+    {
+        return order;
+    }
+
+    void ShowOrder()                        // 주문 패널 표기
     {
         float curY = 0;
 
@@ -203,7 +211,7 @@ public class OrderManager : MonoBehaviour
         orderTimeImage.fillAmount = Mathf.Clamp01(ratio);
     }
 
-    public void OrderClear()
+    public void OrderClear()                // 주문 초기화
     {
         foreach (Transform child in toppingGroup)
         {
@@ -211,6 +219,7 @@ public class OrderManager : MonoBehaviour
         }
 
         orderPanel.SetActive(false);
+        currentCustomer = null;
         SetOrderTime(0f);
         order.Clear();
     }

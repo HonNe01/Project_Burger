@@ -81,7 +81,7 @@ public class Customer : MonoBehaviour
         agent.isStopped = true;
 
         // 주문 생성
-        myOrder = OrderManager.instance.Order();
+        myOrder = OrderManager.instance.Order(this);
         Debug.Log($"[{gameObject.name}] 주문 시작 : " + string.Join(", ", myOrder));
         SoundManager.instance.PlayCustomerSFX(SoundManager.SFX.Order, customerType);
 
@@ -106,6 +106,13 @@ public class Customer : MonoBehaviour
             if (!isAngry)
                 StartCoroutine(Co_Angry());
         }
+    }
+
+    public void FailOrder()
+    {
+        Debug.Log($"[{gameObject.name}] 손님 퇴장!! (주문 실패)");
+
+        StartCoroutine(Co_Angry());
     }
 
     private IEnumerator Co_Angry()
