@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 238493547728325112}
   - component: {fileID: 7064145033275262556}
-  - component: {fileID: 475419951852645848}
   m_Layer: 0
   m_Name: CustomerManager
   m_TagString: Untagged
@@ -62,24 +61,3 @@ MonoBehaviour:
   hardSpawnInterval: {x: 10, y: 12}
   hardMode: 0
   queueSpacing: 2
---- !u!95 &475419951852645848
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6570785246985923173}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 84684403f60ac475f86a40b988211290, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0

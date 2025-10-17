@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   order: 
+  currentCustomer: {fileID: 0}
   orderPanel: {fileID: 0}
   orderTimeImage: {fileID: 0}
   toppingGroup: {fileID: 0}
