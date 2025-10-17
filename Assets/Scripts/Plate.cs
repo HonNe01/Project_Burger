@@ -6,38 +6,44 @@ public class Plate : MonoBehaviour
 {
     [Tooltip("재료가 쌓이기 시작할 중심 위치")]
     public Transform plateCenter;
+
     [Tooltip("재료가 접시 위에 있는지 판별할 감지 영역")]
     public Collider plateTrigger;
 
-    private List<GameObject> stackedToppings = new List<GameObject>();
+    private readonly List<GameObject> stackedToppings = new List<GameObject>();
 
+    // 접시 위에 있는 위치인지 확인
     public bool IsPositionOnPlate(Vector3 position)
     {
         if (plateTrigger == null) return false;
         return plateTrigger.bounds.Contains(position);
     }
 
+    // 재료 추가
     public void AddTopping(GameObject toppingObj)
     {
-        Topping topping = toppingObj.GetComponent<Topping>();
-        if (topping == null || stackedToppings.Contains(toppingObj)) return;
+        if (toppingObj == null || stackedToppings.Contains(toppingObj)) return;
 
-        topping.CurrentPlate = this;
+        // Topping 또는 Patty 스크립트를 모두 인식 가능하게 처리
+        var topping = toppingObj.GetComponent<Topping>();
+        var patty = toppingObj.GetComponent<Patty>();
+
+        if (topping != null) topping.CurrentPlate = this;
+        if (patty != null) patty.CurrentPlate = this;
+
         stackedToppings.Add(toppingObj);
         ReStackAllToppings();
-        Debug.Log($"[Plate] {topping.ingredientType} 추가됨. 현재 {stackedToppings.Count}개 쌓임.");
+
+        Debug.Log($"[Plate] {toppingObj.name} 추가됨. 현재 {stackedToppings.Count}개 쌓임.");
     }
 
+    // 재료 제거
     public void RemoveTopping(GameObject toppingObj)
     {
         if (stackedToppings.Contains(toppingObj))
         {
-            Topping topping = toppingObj.GetComponent<Topping>();
-            Debug.Log($"[Plate] {topping.ingredientType} 제거됨.");
             stackedToppings.Remove(toppingObj);
 
-            // --- 여기가 수정된 부분입니다 ---
-            // 제거된 재료의 물리 효과를 즉시 다시 켜줍니다.
             Rigidbody rb = toppingObj.GetComponent<Rigidbody>();
             if (rb != null)
             {
@@ -45,37 +51,42 @@ public class Plate : MonoBehaviour
                 rb.useGravity = true;
             }
 
-            // 남은 재료들을 다시 정렬합니다.
             ReStackAllToppings();
+
+            Debug.Log($"[Plate] {toppingObj.name} 제거됨. 현재 {stackedToppings.Count}개 남음.");
         }
     }
 
+    // 전체 재정렬
     private void ReStackAllToppings()
     {
         float currentStackHeight = 0f;
 
         foreach (GameObject toppingObj in stackedToppings)
         {
+            if (toppingObj == null) continue;
+
             Rigidbody rb = toppingObj.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                // 쌓여있는 동안에는 물리 효과를 끕니다.
                 rb.isKinematic = true;
                 rb.useGravity = false;
             }
 
             Collider col = toppingObj.GetComponent<Collider>();
-            float height = col != null ? col.bounds.size.y : 0.1f;
-            
-            float pivotToBottomOffset = toppingObj.transform.position.y - col.bounds.min.y;
-            Vector3 targetPos = plateCenter.position + new Vector3(0, currentStackHeight + pivotToBottomOffset, 0);
+            if (col == null) continue;
 
-            StartCoroutine(SmoothMove(toppingObj.transform, targetPos, plateCenter.rotation, 0.2f));
+            float height = col.bounds.size.y;
+            float pivotOffset = toppingObj.transform.position.y - col.bounds.min.y;
+            Vector3 targetPos = plateCenter.position + new Vector3(0, currentStackHeight + pivotOffset, 0);
+
+            StartCoroutine(SmoothMove(toppingObj.transform, targetPos, plateCenter.rotation, 0.15f));
 
             currentStackHeight += height;
         }
     }
 
+    // 부드러운 이동 (정렬 애니메이션)
     private IEnumerator SmoothMove(Transform obj, Vector3 targetPos, Quaternion targetRot, float duration)
     {
         Vector3 startPos = obj.position;
@@ -85,11 +96,12 @@ public class Plate : MonoBehaviour
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            float t = elapsed / duration;
-            t = t * t * (3f - 2f * t); // ease-out
+            float t = Mathf.Clamp01(elapsed / duration);
+            t = t * t * (3f - 2f * t); // smoothstep
 
             obj.position = Vector3.Lerp(startPos, targetPos, t);
             obj.rotation = Quaternion.Slerp(startRot, targetRot, t);
+
             yield return null;
         }
 
@@ -97,4 +109,3 @@ public class Plate : MonoBehaviour
         obj.rotation = targetRot;
     }
 }
-
