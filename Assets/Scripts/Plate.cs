@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 public class Plate : MonoBehaviour
 {
@@ -16,6 +18,7 @@ public class Plate : MonoBehaviour
     [SerializeField] private Customer curCustomer;
     public void SetCustomer(Customer c) => curCustomer = c;
     private readonly List<Ingredient> _tempSeq = new();
+    private XRBaseInputInteractor _lastController;
 
     public bool IsPositionOnPlate(Vector3 position)
     {
@@ -152,18 +155,35 @@ public class Plate : MonoBehaviour
             Debug.Log("[Plate] 서빙 성공!");
 
             SoundManager.instance?.PlayCustomerSFX(SoundManager.SFX.Success, curCustomer != null ? curCustomer.customerType : CustomerType.Default);
+            
             curCustomer?.CompleteOrder();
+            SendHaptics(_lastController, 0.5f, 0.12f);
         }
         else
         {
             Debug.LogWarning("[Plate] 서빙 실패, 주문과 다릅니다!");
 
-            SoundManager.instance?.PlayCustomerSFX(SoundManager.SFX.Success, curCustomer != null ? curCustomer.customerType : CustomerType.Default);
+            SoundManager.instance?.PlayCustomerSFX(SoundManager.SFX.Fail, curCustomer != null ? curCustomer.customerType : CustomerType.Default);
+
             curCustomer?.CompleteOrder();
+            SendHaptics(_lastController, 0.1f, 0.12f);
         }
 
         // 도마 정리
         ClearPlate();
+    }
+
+    public void SetController(XRBaseInputInteractor interactor)
+    {
+        _lastController = interactor;
+    }
+
+    private void SendHaptics(XRBaseInputInteractor interactor, float amplitude, float duration)
+    {
+        if (interactor != null)
+        {
+            interactor.SendHapticImpulse(amplitude, duration);
+        }
     }
 
     public void ClearPlate()                // 도마 초기화
