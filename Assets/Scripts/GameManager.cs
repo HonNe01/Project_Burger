@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Easy 버튼에서 호출될 함수
-    public void SetEasyMode()
+    public void SetEasy()
     {
         currentMode = GameMode.Easy;
         Debug.Log("게임 모드: Easy 선택됨");
@@ -38,8 +38,15 @@ public class GameManager : MonoBehaviour
         easyPanel.SetActive(true);
     }
 
+    public void EasyNo()
+    {
+        currentMode = GameMode.None;
+
+        easyPanel.SetActive(false);
+    }
+
     // Hard 버튼에서 호출될 함수
-    public void SetHardMode()
+    public void SetHard()
     {
         currentMode = GameMode.Hard;
         Debug.Log("게임 모드: Hard 선택됨");
@@ -47,9 +54,19 @@ public class GameManager : MonoBehaviour
         hardPanel.SetActive(true);
     }
 
+    public void HardNo()
+    {
+        currentMode = GameMode.None;
+
+        hardPanel.SetActive(false);
+    }
+
     // 모드에 따른 게임 시작
     public void StartGame()
     {
+        easyPanel.SetActive(false);
+        hardPanel.SetActive(false);
+
         switch (currentMode)
         {
             case GameMode.Easy:
