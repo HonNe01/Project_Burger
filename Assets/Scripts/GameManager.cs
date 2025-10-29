@@ -9,12 +9,14 @@ public class GameManager : MonoBehaviour
     public GameMode currentMode = GameMode.None;
 
     [Header(" === Game UI === ")]
+    [SerializeField] private GameObject mainPanel;
     [SerializeField] private GameObject easyPanel;
     [SerializeField] private GameObject hardPanel;
     [SerializeField] private GameObject exitPanel;
 
     [Header(" === Score UI === ")]
     [SerializeField] private GameObject scorePanel;
+    [SerializeField] private GameObject endPanel;
 
 
     void Awake()
@@ -83,12 +85,27 @@ public class GameManager : MonoBehaviour
         }
 
         if (scorePanel != null) scorePanel.SetActive(true);
+        mainPanel.SetActive(false);
         CustomerManager.instance.GameStart();
     }
 
     public void EndGame()
     {
+        endPanel.SetActive(true);
+    }
+
+    public void EndYes()
+    {
+        endPanel.SetActive(false);
         scorePanel.SetActive(false);
+        
+        CustomerManager.instance.GameStop();
+        mainPanel.SetActive(true);
+    }
+    
+    public void EndNo()
+    {
+        endPanel.SetActive(false);
     }
 
     public void ExitGame()
@@ -103,9 +120,10 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Exit");
         Application.Quit();
     }
-    
+
     public void ExitNo()
     {
         exitPanel.SetActive(false);
     }
+    
 }

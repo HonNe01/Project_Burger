@@ -64,6 +64,11 @@ public class CustomerManager : MonoBehaviour
         StartCoroutine(Co_SpawnCustomer());
     }
 
+    public void GameStop()
+    {
+
+    }
+
     private IEnumerator Co_SpawnCustomer()
     {
         while (true)
