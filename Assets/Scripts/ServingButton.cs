@@ -9,17 +9,10 @@ public class ServingButton : MonoBehaviour
 {
     public Plate plate;
     public float cooldown = 0.5f;
-
-    private XRSimpleInteractable interactable;
     private bool locked;
 
-    void Awake() 
-    {
-        interactable = GetComponent<XRSimpleInteractable>();
-        interactable.activated.AddListener(OnActivated);
-    }
 
-    private void OnActivated(ActivateEventArgs args)
+    public void OnButton(SelectEnterEventArgs args)
     {
         plate.SetController(args.interactableObject as XRBaseInputInteractor);
 
