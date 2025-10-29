@@ -49,8 +49,7 @@ public class CustomerManager : MonoBehaviour
         instance = this;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void GameStart()
     {
         if (hardMode)
         {
@@ -114,7 +113,7 @@ public class CustomerManager : MonoBehaviour
             else
             {
                 // 뒷 손님 줄 세우기
-                Vector3 waitPos = orderPoint.position - orderPoint.forward * (queueSpacing * i);
+                Vector3 waitPos = orderPoint.position - orderPoint.right * (queueSpacing * i);
                 GameObject temp = new GameObject("QueuePos");
                 temp.transform.position = waitPos;
                 cust.SetTarget(temp.transform);

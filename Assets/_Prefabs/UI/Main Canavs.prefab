@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3865833683616958183}
   - component: {fileID: 6850208920905885469}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: Exit Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 333946050253402341}
   - component: {fileID: 943742731459078556}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: Option Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -463,7 +463,7 @@ GameObject:
   - component: {fileID: 3749839103162729}
   - component: {fileID: 3077683780675037328}
   m_Layer: 5
-  m_Name: Hard_mode
+  m_Name: Hard Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1692,7 +1692,7 @@ GameObject:
   - component: {fileID: 4457677706378533628}
   - component: {fileID: 1881939933686926804}
   m_Layer: 5
-  m_Name: Easy_mode_Panel
+  m_Name: Easy Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2111,7 +2111,7 @@ GameObject:
   - component: {fileID: 7966311994546477632}
   - component: {fileID: 7435977918437331364}
   m_Layer: 5
-  m_Name: Hard_mode_Panel
+  m_Name: Hard Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3127,7 +3127,7 @@ GameObject:
   - component: {fileID: 5517380516044407516}
   - component: {fileID: 3943474115074164921}
   m_Layer: 5
-  m_Name: Easy_mode
+  m_Name: Easy Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3260,6 +3260,7 @@ GameObject:
   - component: {fileID: 5999838131969323973}
   - component: {fileID: 4678426334448406879}
   - component: {fileID: 8217915318486458926}
+  - component: {fileID: 8537233232359305723}
   m_Layer: 5
   m_Name: Main Canavs
   m_TagString: Untagged
@@ -3274,7 +3275,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8959602306799072519}
-  m_LocalRotation: {x: -0.06413963, y: -0.70419186, z: -0.06413963, w: 0.70419186}
+  m_LocalRotation: {x: -0.06414227, y: -0.7041916, z: -0.06414227, w: 0.7041916}
   m_LocalPosition: {x: 0, y: 0, z: 2.569}
   m_LocalScale: {x: 0.8, y: 0.88, z: 0.9}
   m_ConstrainProportionsScale: 0
@@ -3372,6 +3373,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
+--- !u!114 &8537233232359305723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8959602306799072519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43b3c1e82f728498fa645e1d8aaaa320, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentMode: 0
+  easyPanel: {fileID: 3812260549441737533}
+  hardPanel: {fileID: 5047680878610212209}
+  exitPanel: {fileID: 2560881672417694343}
 --- !u!1 &9108656796606820416
 GameObject:
   m_ObjectHideFlags: 0
