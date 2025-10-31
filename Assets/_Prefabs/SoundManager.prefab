@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0564cd4828ba14f2d8874c795a5d8778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainBGMClip: {fileID: 8300000, guid: e1acbb9a928f143dd977b3bb9864c682, type: 3}
+  mainBGMClip: {fileID: 8300000, guid: 292127f099e7842bbb23e0108c721096, type: 3}
   gameBGMClip: {fileID: 8300000, guid: 9ddfe881c728f44638f7ab9b359c8d27, type: 3}
-  bgmVolume: 0.8
+  bgmVolume: 0.5
   sfxClips:
   - {fileID: 8300000, guid: 68bb64ad12ae145599acc85276605677, type: 3}
   - {fileID: 8300000, guid: 745e7f52abd3643118c2b3e20374ca35, type: 3}
