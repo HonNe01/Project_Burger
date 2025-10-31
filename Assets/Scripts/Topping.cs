@@ -25,6 +25,8 @@ public class Topping : MonoBehaviour
 
     [HideInInspector]
     public Plate CurrentPlate { get; set; }
+    public bool isPlate = false;
+    Plate plate;
 
     void Awake()
     {
@@ -39,12 +41,37 @@ public class Topping : MonoBehaviour
         initialRotation = transform.rotation;
     }
 
+    void Start()
+    {
+        plate = FindObjectOfType<Plate>();
+    }
+
     void OnDestroy()
     {
         if (grabInteractable != null)
         {
             grabInteractable.selectEntered.RemoveListener(OnGrabbed);
             grabInteractable.selectExited.RemoveListener(OnReleased);
+        }
+    }
+
+    void Update()
+    {
+        // 리스폰 소스일 때, 원래 자리에서 멀어지면 새 오브젝트 생성
+        if (isRespawnSource && !hasRespawned)
+        {
+            float distance = Vector3.Distance(transform.position, initialPosition);
+            if (distance > respawnThreshold)
+            {
+                SpawnRespawnCopy();
+                hasRespawned = true;
+            }
+        }
+
+        if (!isPlate && plate.IsPositionOnPlate(transform.position))
+        {
+            isPlate = true;
+            plate.AddTopping(gameObject);
         }
     }
 
@@ -60,7 +87,6 @@ public class Topping : MonoBehaviour
 
     private void OnReleased(SelectExitEventArgs args)
     {
-        Plate plate = FindObjectOfType<Plate>();
         if (plate == null) return;
 
         if (plate.IsPositionOnPlate(transform.position))
@@ -74,20 +100,6 @@ public class Topping : MonoBehaviour
             {
                 rb.isKinematic = false;
                 rb.useGravity = true;
-            }
-        }
-    }
-
-    void Update()
-    {
-        // 리스폰 소스일 때, 원래 자리에서 멀어지면 새 오브젝트 생성
-        if (isRespawnSource && !hasRespawned)
-        {
-            float distance = Vector3.Distance(transform.position, initialPosition);
-            if (distance > respawnThreshold)
-            {
-                SpawnRespawnCopy();
-                hasRespawned = true;
             }
         }
     }

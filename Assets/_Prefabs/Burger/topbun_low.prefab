@@ -30,13 +30,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 491540523578944947}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.19384553, z: -0, w: 0.9810321}
+  m_LocalRotation: {x: 0, y: 0.1938491, z: 0, w: 0.98103136}
   m_LocalPosition: {x: -2.2861629, y: 1.6664838, z: 0.8024822}
-  m_LocalScale: {x: 0.12261714, y: 0.122617014, z: 0.12261714}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 22.355, z: 0}
 --- !u!33 &4511875882467641632
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -99,10 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d3717fc9671e4254a680b8f6cba9507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ingredientType: 6
   toppingPrefab: {fileID: 491540523578944947}
-  ingredientType: 0
   isRespawnSource: 1
   respawnThreshold: 0.2
+  isPlate: 0
 --- !u!54 &-8691558134111449596
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -30,9 +30,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4766762238791039797}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.2858975, y: 1.5934299, z: 0.8024822}
-  m_LocalScale: {x: 0.122617014, y: 0.1226169, z: 0.1226171}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -100,7 +100,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientType: 2
-  spawnTransform: {fileID: 0}
+  toppingPrefab: {fileID: 4766762238791039797}
+  isRespawnSource: 1
+  respawnThreshold: 0.2
+  isPlate: 0
 --- !u!54 &2008439803357147250
 Rigidbody:
   m_ObjectHideFlags: 0
