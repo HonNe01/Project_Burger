@@ -26,8 +26,11 @@ public class Topping : MonoBehaviour
     public Plate CurrentPlate { get; set; }
     public bool isPlate = false;
 
+    Rigidbody rb;
+
     void Awake()
     {
+        rb = GetComponent<Rigidbody>();
         grabInteractable = GetComponent<XRGrabInteractable>();
         if (grabInteractable != null)
         {
@@ -42,6 +45,12 @@ public class Topping : MonoBehaviour
     void Start()
     {
         CurrentPlate = FindObjectOfType<Plate>();
+
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+            rb.useGravity = true;
+        }
     }
 
     void OnDestroy()
