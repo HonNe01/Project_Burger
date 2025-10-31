@@ -1,12 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
 
     [Header(" # BGM")]
-    public AudioClip bgmClip;
+    public AudioClip mainBGMClip;
+    public AudioClip gameBGMClip;
     public float bgmVolume;
     AudioSource bgmPlayer;
 
@@ -48,6 +50,8 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         Init();
+
+        PlayMainBGM();
     }
 
     void Init()
@@ -59,7 +63,6 @@ public class SoundManager : MonoBehaviour
         bgmPlayer.playOnAwake = false;
         bgmPlayer.loop = true;
         bgmPlayer.volume = bgmVolume;
-        bgmPlayer.clip = bgmClip;
 
         // SFX Init
         GameObject sfxObject = new GameObject("SFX Player");
@@ -75,12 +78,26 @@ public class SoundManager : MonoBehaviour
     }
 
     // ===== BGM =====
-    public void PlayBGM(bool isPlay)
+    public void PlayMainBGM()
     {
-        if (isPlay)
-            bgmPlayer.Play();
-        else
-            bgmPlayer.Stop();
+        if (bgmPlayer.clip == mainBGMClip && bgmPlayer.isPlaying) return;
+
+        bgmPlayer.clip = mainBGMClip;
+        bgmPlayer.volume = bgmVolume;
+        bgmPlayer.loop = true;
+        bgmPlayer.Play();
+        StartCoroutine(Co_Fade(bgmPlayer));
+    }
+    
+    public void PlayGameBGM()
+    {
+        if (bgmPlayer.clip == gameBGMClip && bgmPlayer.isPlaying) return;
+
+        bgmPlayer.clip = gameBGMClip;
+        bgmPlayer.volume = bgmVolume;
+        bgmPlayer.loop = true;
+        bgmPlayer.Play();
+        StartCoroutine(Co_Fade(bgmPlayer));
     }
 
     public void StopSFX(SFX sfx)
@@ -139,11 +156,29 @@ public class SoundManager : MonoBehaviour
                 soundOffset = 6;
                 break;
         }
-        
+
         if ((int)sfx < sfxClips.Length)
         {
             PlaySFX((SFX)((int)sfx + soundOffset));
         }
+    }
+    
+    private IEnumerator Co_Fade(AudioSource source)
+    {
+        source.volume = 0f;
+
+        float duration = 3f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            source.volume = Mathf.Lerp(0f, bgmVolume, t);
+            yield return null;
+        }
+
+        source.volume = bgmVolume;
     }
 }
 
