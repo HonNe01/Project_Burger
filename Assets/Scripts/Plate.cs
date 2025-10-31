@@ -159,7 +159,6 @@ public class Plate : MonoBehaviour
 
             SoundManager.instance?.PlayCustomerSFX(SoundManager.SFX.Success, curCustomer != null ? curCustomer.customerType : CustomerType.Default);
             
-            // GameManager.instance. +100
             curCustomer?.CompleteOrder();
             SendHaptics(_lastController, 0.5f, 0.12f);
         }
@@ -169,7 +168,6 @@ public class Plate : MonoBehaviour
 
             SoundManager.instance?.PlayCustomerSFX(SoundManager.SFX.Fail, curCustomer != null ? curCustomer.customerType : CustomerType.Default);
 
-            // GameManager.instance. -50
             curCustomer?.FailOrder();
             SendHaptics(_lastController, 0.1f, 0.12f);
         }

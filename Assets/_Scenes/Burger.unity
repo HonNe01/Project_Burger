@@ -6201,26 +6201,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
-    - target: {fileID: 8409915945993403063, guid: e5078304f46f14ad8b9937f48ac4e3bb, type: 3}
-      propertyPath: sfxClips.Array.size
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 8409915945993403063, guid: e5078304f46f14ad8b9937f48ac4e3bb, type: 3}
-      propertyPath: sfxClips.Array.data[13]
-      value: 
-      objectReference: {fileID: 8300000, guid: 41580b70f8c4a47f18ec6e0d55898b1f, type: 3}
-    - target: {fileID: 8409915945993403063, guid: e5078304f46f14ad8b9937f48ac4e3bb, type: 3}
-      propertyPath: sfxClips.Array.data[14]
-      value: 
-      objectReference: {fileID: 8300000, guid: b6af7325eb1df47e3867a25c6341d3ba, type: 3}
-    - target: {fileID: 8409915945993403063, guid: e5078304f46f14ad8b9937f48ac4e3bb, type: 3}
-      propertyPath: sfxClips.Array.data[15]
-      value: 
-      objectReference: {fileID: 8300000, guid: 68bb64ad12ae145599acc85276605677, type: 3}
-    - target: {fileID: 8409915945993403063, guid: e5078304f46f14ad8b9937f48ac4e3bb, type: 3}
-      propertyPath: sfxClips.Array.data[16]
-      value: 
-      objectReference: {fileID: 8300000, guid: 1fe015a764b1e404d87244221394c2f2, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13202,6 +13182,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8479716094822098862, guid: b9e30df1a17b54307abda8401c520802, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1766006945}
+    - target: {fileID: 8479716094822098862, guid: b9e30df1a17b54307abda8401c520802, type: 3}
+      propertyPath: m_VertexColorAlwaysGammaSpace
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 576737449027726671, guid: b9e30df1a17b54307abda8401c520802, type: 3}
@@ -14777,8 +14765,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 4730062744095378}
-  - {fileID: 7188491291780850456}
-  - {fileID: 2096383997314442302}
   - {fileID: 1766006944}
   - {fileID: 57441544}
   - {fileID: 1725633604}
@@ -14796,6 +14782,8 @@ SceneRoots:
   - {fileID: 166117399}
   - {fileID: 1174578101}
   - {fileID: 1166251105}
+  - {fileID: 7188491291780850456}
+  - {fileID: 2096383997314442302}
   - {fileID: 1824451757}
   - {fileID: 1788741578}
   - {fileID: 1152954322}

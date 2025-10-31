@@ -20,10 +20,16 @@ public class SoundManager : MonoBehaviour
 
     public enum SFX
     {
-        Select, Success, Patty, Patty_Burn,
+        // System : 0 ~
+        Click, Success, Fail, Bell,
+
+        // Coocking : 4 ~
+        Pick, Patty, Patty_Burn,
+
+        // Customer : 7 ~
         Order, Good, Angry,
         Order_Kid, Good_Kid, Angry_Kid,
-        Order_Girl, Good_Girl, Angry_Girl, Click, Bell, Fail, grab
+        Order_Girl, Good_Girl, Angry_Girl,
     }
 
     void Awake()
