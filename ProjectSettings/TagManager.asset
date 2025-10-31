@@ -8,6 +8,7 @@ TagManager:
   - CounterPoint
   - Grill
   - Trash
+  - Plate
   layers:
   - Default
   - TransparentFX

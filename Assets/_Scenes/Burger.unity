@@ -3457,6 +3457,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Plate
       objectReference: {fileID: 0}
+    - target: {fileID: 3404218275247186836, guid: 0f3d1d12684324f5da34c95ae28ed4b4, type: 3}
+      propertyPath: m_TagString
+      value: Plate
+      objectReference: {fileID: 0}
     - target: {fileID: 6671443736722759580, guid: 0f3d1d12684324f5da34c95ae28ed4b4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.1704221
@@ -10170,6 +10174,22 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1766006945}
+    - target: {fileID: 3943474115074164921, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3943474115074164921, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3943474115074164921, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3943474115074164921, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 8959602306799072519, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
       propertyPath: m_Name
       value: Main Canvas

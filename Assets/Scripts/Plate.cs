@@ -30,7 +30,6 @@ public class Plate : MonoBehaviour
         Topping topping = toppingObj.GetComponent<Topping>();
         if (topping == null || stackedToppings.Contains(toppingObj)) return;
 
-        topping.CurrentPlate = this;
         stackedToppings.Add(toppingObj);
         ReStackAllToppings();
         Debug.Log($"[Plate] {topping.ingredientType} 추가됨. 현재 {stackedToppings.Count}개 쌓임.");
@@ -191,25 +190,11 @@ public class Plate : MonoBehaviour
 
     public void ClearPlate()                // 도마 초기화
     {
+        StopAllCoroutines();
+
         foreach (var go in stackedToppings)
         {
             if (go == null) continue;
-
-            var rb = go.GetComponent<Rigidbody>();
-            var coll = go.GetComponent<Collider>();
-
-            if (rb != null)
-            {
-                rb.isKinematic = false;
-                rb.useGravity = true;
-                rb.velocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-            }
-
-            if (coll != null)
-            {
-                coll.enabled = true;
-            }
 
             Destroy(go);
         }
