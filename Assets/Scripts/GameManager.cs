@@ -1,27 +1,39 @@
+using System;
 using UnityEngine;
+using TMPro; // ✅ TextMeshPro 사용
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
     public enum GameMode { None, Easy, Hard }
-    [Header(" === Game Setting === ")]
+
+    [Header("=== Game Setting ===")]
     public GameMode currentMode = GameMode.None;
 
-    [Header(" === Game UI === ")]
+    [Header("=== Game UI ===")]
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private GameObject easyPanel;
     [SerializeField] private GameObject hardPanel;
     [SerializeField] private GameObject exitPanel;
 
-    [Header(" === Score UI === ")]
+    [Header("=== Score UI ===")]
     [SerializeField] private GameObject scorePanel;
     [SerializeField] private GameObject endPanel;
+    [SerializeField] private TextMeshProUGUI scoreTMP;
 
+    [Header("=== Timer (TextMeshPro) ===")]
+    [SerializeField] private TextMeshProUGUI timerTMP;
+
+    [SerializeField] private float startTime = 180f;    
+
+    // 내부 관리 변수들
+    private float remainingTime;
+    private bool isTimerRunning = false;
+    private int currentScore = 0;
 
     void Awake()
     {
-        // 싱글톤 초기화
         if (instance == null) instance = this;
         else Destroy(gameObject);
 
@@ -29,41 +41,57 @@ public class GameManager : MonoBehaviour
         hardPanel.SetActive(false);
         exitPanel.SetActive(false);
         if (scorePanel != null) scorePanel.SetActive(false);
+        if (endPanel != null) endPanel.SetActive(false);
+
+        ResetTimer();
+        ResetScore();
     }
 
-    // Easy 버튼에서 호출될 함수
+    void Update()
+    {
+        if (isTimerRunning)
+        {
+            remainingTime -= Time.deltaTime;
+
+            if (remainingTime <= 0f)
+            {
+                remainingTime = 0f;
+                StopTimer();
+                EndGame();
+            }
+
+            UpdateTimerUI(remainingTime);
+        }
+    }
+
+    // ====== 모드 선택 ======
     public void SetEasy()
     {
         currentMode = GameMode.Easy;
         Debug.Log("게임 모드: Easy 선택됨");
-
         easyPanel.SetActive(true);
     }
 
     public void EasyNo()
     {
         currentMode = GameMode.None;
-
         easyPanel.SetActive(false);
     }
 
-    // Hard 버튼에서 호출될 함수
     public void SetHard()
     {
         currentMode = GameMode.Hard;
         Debug.Log("게임 모드: Hard 선택됨");
-
         hardPanel.SetActive(true);
     }
 
     public void HardNo()
     {
         currentMode = GameMode.None;
-
         hardPanel.SetActive(false);
     }
 
-    // 모드에 따른 게임 시작
+    // ====== 게임 시작 ======
     public void StartGame()
     {
         easyPanel.SetActive(false);
@@ -72,42 +100,53 @@ public class GameManager : MonoBehaviour
         switch (currentMode)
         {
             case GameMode.Easy:
-                // Easy 모드 세팅
-                // 예: 적 체력 낮추기, 적 생성 수 줄이기 등
+                startTime = 180f;
                 Debug.Log("Easy 모드로 게임 시작!");
                 break;
-
             case GameMode.Hard:
-                // Hard 모드 세팅
-                // 예: 적 체력 높이기, 적 생성 수 늘리기 등
+                startTime = 120f;
                 Debug.Log("Hard 모드로 게임 시작!");
                 break;
         }
 
         if (scorePanel != null) scorePanel.SetActive(true);
         mainPanel.SetActive(false);
+
         CustomerManager.instance.GameStart();
+
+        // 시간과 점수 초기화 후 시작
+        ResetTimer();
+        ResetScore();
+        StartTimer();
     }
 
+    // ====== 게임 종료 ======
     public void EndGame()
     {
+        StopTimer();
         endPanel.SetActive(true);
+        Debug.Log("⏰ 제한시간 종료! 게임 오버");
     }
 
     public void EndYes()
     {
         endPanel.SetActive(false);
-        scorePanel.SetActive(false);
-        
+        if (scorePanel != null) scorePanel.SetActive(false);
+
         CustomerManager.instance.GameStop();
         mainPanel.SetActive(true);
+
+        ResetTimer();
+        ResetScore();
     }
-    
+
     public void EndNo()
     {
         endPanel.SetActive(false);
+        StartTimer();
     }
 
+    // ====== 종료 관련 ======
     public void ExitGame()
     {
         exitPanel.SetActive(true);
@@ -116,7 +155,6 @@ public class GameManager : MonoBehaviour
     public void ExitYes()
     {
         exitPanel.SetActive(false);
-
         Debug.Log("Game Exit");
         Application.Quit();
     }
@@ -125,5 +163,45 @@ public class GameManager : MonoBehaviour
     {
         exitPanel.SetActive(false);
     }
-    
+
+    // ====== 타이머 ======
+    public void StartTimer() => isTimerRunning = true;
+    public void StopTimer() => isTimerRunning = false;
+
+    public void ResetTimer()
+    {
+        remainingTime = startTime;
+        UpdateTimerUI(remainingTime);
+    }
+
+    private void UpdateTimerUI(float timeSec)
+    {
+        if (timerTMP == null) return;
+
+        int total = Mathf.FloorToInt(timeSec);
+        int mm = total / 60;
+        int ss = total % 60;
+
+        timerTMP.text = $"<b>TIME</b>\n{mm:00}:{ss:00}";
+    }
+
+    // ====== ✅ 점수 관리 ======
+    public void AddScore(int amount)
+    {
+        currentScore += amount;
+        UpdateScoreUI();
+        Debug.Log($"현재 점수: {currentScore}");
+    }
+
+    public void ResetScore()
+    {
+        currentScore = 0;
+        UpdateScoreUI();
+    }
+
+    private void UpdateScoreUI()
+    {
+        if (scoreTMP == null) return;
+        scoreTMP.text = $"<b>SCORE</b>\n{currentScore}";
+    }
 }

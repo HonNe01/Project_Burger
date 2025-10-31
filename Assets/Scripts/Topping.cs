@@ -23,10 +23,8 @@ public class Topping : MonoBehaviour
 
     private bool hasRespawned = false; // 중복 리스폰 방지용
 
-    [HideInInspector]
     public Plate CurrentPlate { get; set; }
     public bool isPlate = false;
-    Plate plate;
 
     void Awake()
     {
@@ -43,7 +41,7 @@ public class Topping : MonoBehaviour
 
     void Start()
     {
-        plate = FindObjectOfType<Plate>();
+        CurrentPlate = FindObjectOfType<Plate>();
     }
 
     void OnDestroy()
@@ -68,16 +66,18 @@ public class Topping : MonoBehaviour
             }
         }
 
-        if (!isPlate && plate.IsPositionOnPlate(transform.position))
+        if (!isPlate && CurrentPlate.IsPositionOnPlate(transform.position))
         {
             isPlate = true;
-            plate.AddTopping(gameObject);
+            CurrentPlate.AddTopping(gameObject);
         }
     }
 
     // Plate에서 제거만 담당 (리스폰 X)
     private void OnGrabbed(SelectEnterEventArgs args)
     {
+        SoundManager.instance.PlaySFX(SoundManager.SFX.Pick);
+
         if (CurrentPlate != null)
         {
             CurrentPlate.RemoveTopping(gameObject);
@@ -87,11 +87,13 @@ public class Topping : MonoBehaviour
 
     private void OnReleased(SelectExitEventArgs args)
     {
-        if (plate == null) return;
+        SoundManager.instance.PlaySFX(SoundManager.SFX.Pick);
 
-        if (plate.IsPositionOnPlate(transform.position))
+        if (CurrentPlate == null) return;  
+
+        if (CurrentPlate.IsPositionOnPlate(transform.position))
         {
-            plate.AddTopping(gameObject);
+            CurrentPlate.AddTopping(gameObject);
         }
         else
         {

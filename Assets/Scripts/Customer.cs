@@ -113,7 +113,7 @@ public class Customer : MonoBehaviour
         SoundManager.instance.PlayCustomerSFX(SoundManager.SFX.Good, customerType);
         Debug.Log($"[{gameObject.name}] 손님 퇴장!! (주문 완료)");
 
-        // GameManager.instance. +100
+        GameManager.instance.AddScore(100);
         EnterExitState();
     }
 
@@ -121,7 +121,7 @@ public class Customer : MonoBehaviour
     {
         Debug.Log($"[{gameObject.name}] 손님 퇴장!! (주문 실패)");
 
-        // GameManager.instance. -50
+        GameManager.instance.AddScore(-50);
         StartCoroutine(Co_Angry());
     }
 

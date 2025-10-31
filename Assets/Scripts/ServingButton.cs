@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
@@ -21,12 +22,13 @@ public class ServingButton : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) TryServe();
+        //if (Input.GetKeyDown(KeyCode.Space)) TryServe();
     }
 
     private void TryServe()
     {
         if (locked) return;
+        SoundManager.instance.PlaySFX(SoundManager.SFX.Bell);
         locked = true;
 
         if (OrderManager.instance.GetCurrentOrder().Count > 0)
@@ -34,8 +36,13 @@ public class ServingButton : MonoBehaviour
             plate.CompleteOrder();
         }
 
-        Invoke(nameof(Unlock), cooldown);
+        StartCoroutine(Co_Unlock(cooldown));
     }
 
-    private void Unlock() => locked = false;
+    private IEnumerator Co_Unlock(float time) 
+    {
+        yield return new WaitForSeconds(time);
+
+        locked = false;
+    }
 }
