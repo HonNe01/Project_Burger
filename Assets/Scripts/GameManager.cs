@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
         easyPanel.SetActive(false);
         hardPanel.SetActive(false);
         exitPanel.SetActive(false);
+
         if (scorePanel != null) scorePanel.SetActive(false);
         if (endPanel != null) endPanel.SetActive(false);
 
