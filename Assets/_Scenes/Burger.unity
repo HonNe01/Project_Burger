@@ -6201,6 +6201,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8409915945993403063, guid: e5078304f46f14ad8b9937f48ac4e3bb, type: 3}
+      propertyPath: sfxClips.Array.size
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8409915945993403063, guid: e5078304f46f14ad8b9937f48ac4e3bb, type: 3}
+      propertyPath: sfxClips.Array.data[13]
+      value: 
+      objectReference: {fileID: 8300000, guid: 41580b70f8c4a47f18ec6e0d55898b1f, type: 3}
+    - target: {fileID: 8409915945993403063, guid: e5078304f46f14ad8b9937f48ac4e3bb, type: 3}
+      propertyPath: sfxClips.Array.data[14]
+      value: 
+      objectReference: {fileID: 8300000, guid: b6af7325eb1df47e3867a25c6341d3ba, type: 3}
+    - target: {fileID: 8409915945993403063, guid: e5078304f46f14ad8b9937f48ac4e3bb, type: 3}
+      propertyPath: sfxClips.Array.data[15]
+      value: 
+      objectReference: {fileID: 8300000, guid: 68bb64ad12ae145599acc85276605677, type: 3}
+    - target: {fileID: 8409915945993403063, guid: e5078304f46f14ad8b9937f48ac4e3bb, type: 3}
+      propertyPath: sfxClips.Array.data[16]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1fe015a764b1e404d87244221394c2f2, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

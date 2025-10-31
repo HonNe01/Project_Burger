@@ -23,7 +23,7 @@ public class SoundManager : MonoBehaviour
         Select, Success, Patty, Patty_Burn,
         Order, Good, Angry,
         Order_Kid, Good_Kid, Angry_Kid,
-        Order_Girl, Good_Girl, Angry_Girl, Click, Bell, Fail
+        Order_Girl, Good_Girl, Angry_Girl, Click, Bell, Fail, grab
     }
 
     void Awake()
