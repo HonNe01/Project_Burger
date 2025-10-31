@@ -23,7 +23,7 @@ public class Topping : MonoBehaviour
 
     private bool hasRespawned = false; // 중복 리스폰 방지용
 
-    public Plate CurrentPlate { get; set; }
+    public Plate plate;
     public bool isPlate = false;
 
     Rigidbody rb;
@@ -44,13 +44,14 @@ public class Topping : MonoBehaviour
 
     void Start()
     {
-        CurrentPlate = FindObjectOfType<Plate>();
-
         if (rb != null)
         {
             rb.isKinematic = false;
             rb.useGravity = true;
         }
+
+        plate = null;
+        isPlate = false;
     }
 
     void OnDestroy()
@@ -74,12 +75,6 @@ public class Topping : MonoBehaviour
                 hasRespawned = true;
             }
         }
-
-        if (!isPlate && CurrentPlate.IsPositionOnPlate(transform.position))
-        {
-            isPlate = true;
-            CurrentPlate.AddTopping(gameObject);
-        }
     }
 
     // Plate에서 제거만 담당 (리스폰 X)
@@ -87,22 +82,22 @@ public class Topping : MonoBehaviour
     {
         SoundManager.instance.PlaySFX(SoundManager.SFX.Pick);
 
-        if (CurrentPlate != null)
+        if (plate != null)
         {
-            CurrentPlate.RemoveTopping(gameObject);
-            CurrentPlate = null;
+            plate.RemoveTopping(gameObject);
+            plate = null;
+            isPlate = false;
         }
     }
 
     private void OnReleased(SelectExitEventArgs args)
     {
-        SoundManager.instance.PlaySFX(SoundManager.SFX.Pick);
+        if (plate == null) return;  
 
-        if (CurrentPlate == null) return;  
-
-        if (CurrentPlate.IsPositionOnPlate(transform.position))
+        if (plate.IsPositionOnPlate(transform.position))
         {
-            CurrentPlate.AddTopping(gameObject);
+            isPlate = true;
+            plate.AddTopping(gameObject);
         }
         else
         {
@@ -124,6 +119,14 @@ public class Topping : MonoBehaviour
         if (script != null)
         {
             script.isRespawnSource = true; // 새로 생긴 애가 원본 역할 유지
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Plate") && !isPlate)
+        {
+            plate = other.GetComponent<Plate>();
         }
     }
 }

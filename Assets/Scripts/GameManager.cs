@@ -68,26 +68,34 @@ public class GameManager : MonoBehaviour
     // ====== 모드 선택 ======
     public void SetEasy()
     {
-        currentMode = GameMode.Easy;
+        ClickSound();
         Debug.Log("게임 모드: Easy 선택됨");
+
+        currentMode = GameMode.Easy;
         easyPanel.SetActive(true);
     }
 
     public void EasyNo()
     {
+        ClickSound();
+
         currentMode = GameMode.None;
         easyPanel.SetActive(false);
     }
 
     public void SetHard()
     {
-        currentMode = GameMode.Hard;
+        ClickSound();
         Debug.Log("게임 모드: Hard 선택됨");
+
+        currentMode = GameMode.Hard;
         hardPanel.SetActive(true);
     }
 
     public void HardNo()
     {
+        ClickSound();
+
         currentMode = GameMode.None;
         hardPanel.SetActive(false);
     }
@@ -95,6 +103,7 @@ public class GameManager : MonoBehaviour
     // ====== 게임 시작 ======
     public void StartGame()
     {
+        ClickSound();
         easyPanel.SetActive(false);
         hardPanel.SetActive(false);
 
@@ -119,18 +128,23 @@ public class GameManager : MonoBehaviour
         ResetTimer();
         ResetScore();
         StartTimer();
+
+        SoundManager.instance.PlayGameBGM();
     }
 
     // ====== 게임 종료 ======
     public void EndGame()
     {
+        Debug.Log("⏰ 제한시간 종료! 게임 오버");
+
         StopTimer();
         endPanel.SetActive(true);
-        Debug.Log("⏰ 제한시간 종료! 게임 오버");
     }
 
     public void EndYes()
     {
+        ClickSound();
+
         endPanel.SetActive(false);
         if (scorePanel != null) scorePanel.SetActive(false);
 
@@ -143,6 +157,8 @@ public class GameManager : MonoBehaviour
 
     public void EndNo()
     {
+        ClickSound();
+
         endPanel.SetActive(false);
         StartTimer();
     }
@@ -150,18 +166,24 @@ public class GameManager : MonoBehaviour
     // ====== 종료 관련 ======
     public void ExitGame()
     {
+        ClickSound();
+        
         exitPanel.SetActive(true);
     }
 
     public void ExitYes()
     {
-        exitPanel.SetActive(false);
+        ClickSound();
         Debug.Log("Game Exit");
+
+        exitPanel.SetActive(false);
         Application.Quit();
     }
 
     public void ExitNo()
     {
+        ClickSound();
+
         exitPanel.SetActive(false);
     }
 
@@ -204,5 +226,10 @@ public class GameManager : MonoBehaviour
     {
         if (scoreTMP == null) return;
         scoreTMP.text = $"<b>SCORE</b>\n{currentScore}";
+    }
+
+    public void ClickSound()
+    {
+        SoundManager.instance.PlaySFX(SoundManager.SFX.Click);
     }
 }
