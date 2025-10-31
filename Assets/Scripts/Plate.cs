@@ -128,6 +128,9 @@ public class Plate : MonoBehaviour
         if (expected == null || actual == null) return false;
         if (expected.Count != actual.Count) return false;
 
+        Debug.Log("[Plate] 주문: " + string.Join(",", expected));
+        Debug.Log("[Plate] 제작:   " + string.Join(",", actual));
+
         for (int i = 0; i < expected.Count; i++)
         {
             if (expected[i] != actual[i]) return false;
@@ -173,12 +176,12 @@ public class Plate : MonoBehaviour
         ClearPlate();
     }
 
-    public void SetController(XRBaseInputInteractor interactor)
+    public void SetController(XRBaseInputInteractor interactor) // 진동할 컨트롤러 세팅
     {
         _lastController = interactor;
     }
 
-    private void SendHaptics(XRBaseInputInteractor interactor, float amplitude, float duration)
+    private void SendHaptics(XRBaseInputInteractor interactor, float amplitude, float duration) // 컨트롤러 진동
     {
         if (interactor != null)
         {

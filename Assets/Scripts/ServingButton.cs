@@ -19,14 +19,21 @@ public class ServingButton : MonoBehaviour
         TryServe();
     }
 
-    private void TryServe() {
-        if (locked || plate == null) return;
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) TryServe();
+    }
+
+    private void TryServe()
+    {
+        if (locked) return;
         locked = true;
 
-        if (OrderManager.instance.GetCurrentOrder().Count > 0) {
+        if (OrderManager.instance.GetCurrentOrder().Count > 0)
+        {
             plate.CompleteOrder();
         }
-        
+
         Invoke(nameof(Unlock), cooldown);
     }
 
