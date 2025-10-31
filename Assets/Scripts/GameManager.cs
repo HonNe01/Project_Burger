@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
     {
         ClickSound();
         Debug.Log("게임 모드: Easy 선택됨");
-        
+
         currentMode = GameMode.Easy;
         easyPanel.SetActive(true);
     }
@@ -128,6 +128,8 @@ public class GameManager : MonoBehaviour
         ResetTimer();
         ResetScore();
         StartTimer();
+
+        SoundManager.instance.PlayGameBGM();
     }
 
     // ====== 게임 종료 ======
