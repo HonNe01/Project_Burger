@@ -174,6 +174,11 @@ public class OrderManager : MonoBehaviour
         return order;
     }
 
+    public Customer GetCurrentCustomer()
+    {
+        return currentCustomer;
+    }
+
     void ShowOrder()                        // 주문 패널 표기
     {
         float curY = 0;

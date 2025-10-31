@@ -16,17 +16,16 @@ public class Plate : MonoBehaviour
 
     [Header("Order Setting")]
     [SerializeField] private Customer curCustomer;
-    public void SetCustomer(Customer c) => curCustomer = c;
     private readonly List<Ingredient> _tempSeq = new();
     private XRBaseInputInteractor _lastController;
 
-    public bool IsPositionOnPlate(Vector3 position)
+    public bool IsPositionOnPlate(Vector3 position)     // 재료가 도마 위에 있는지
     {
         if (plateTrigger == null) return false;
         return plateTrigger.bounds.Contains(position);
     }
 
-    public void AddTopping(GameObject toppingObj)
+    public void AddTopping(GameObject toppingObj)       // 도마에 재료 추가, 쌓기
     {
         Topping topping = toppingObj.GetComponent<Topping>();
         if (topping == null || stackedToppings.Contains(toppingObj)) return;
@@ -37,7 +36,7 @@ public class Plate : MonoBehaviour
         Debug.Log($"[Plate] {topping.ingredientType} 추가됨. 현재 {stackedToppings.Count}개 쌓임.");
     }
 
-    public void RemoveTopping(GameObject toppingObj)
+    public void RemoveTopping(GameObject toppingObj)    // 도마 위 재료 제거
     {
         if (stackedToppings.Contains(toppingObj))
         {
@@ -59,7 +58,7 @@ public class Plate : MonoBehaviour
         }
     }
 
-    private void ReStackAllToppings()
+    private void ReStackAllToppings()                   // 재료 재정렬
     {
         float currentStackHeight = 0f;
 
@@ -141,6 +140,7 @@ public class Plate : MonoBehaviour
 
     public void CompleteOrder()                             // 주문 제작 완료
     {
+        curCustomer = OrderManager.instance.GetCurrentCustomer();
         var expected = OrderManager.instance?.GetCurrentOrder();
         var actual = GetStackSequence();
 
@@ -159,6 +159,7 @@ public class Plate : MonoBehaviour
 
             SoundManager.instance?.PlayCustomerSFX(SoundManager.SFX.Success, curCustomer != null ? curCustomer.customerType : CustomerType.Default);
             
+            // GameManager.instance. +100
             curCustomer?.CompleteOrder();
             SendHaptics(_lastController, 0.5f, 0.12f);
         }
@@ -168,7 +169,8 @@ public class Plate : MonoBehaviour
 
             SoundManager.instance?.PlayCustomerSFX(SoundManager.SFX.Fail, curCustomer != null ? curCustomer.customerType : CustomerType.Default);
 
-            curCustomer?.CompleteOrder();
+            // GameManager.instance. -50
+            curCustomer?.FailOrder();
             SendHaptics(_lastController, 0.1f, 0.12f);
         }
 

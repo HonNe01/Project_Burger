@@ -108,10 +108,20 @@ public class Customer : MonoBehaviour
         }
     }
 
+    public void CompleteOrder()
+    {
+        SoundManager.instance.PlayCustomerSFX(SoundManager.SFX.Good, customerType);
+        Debug.Log($"[{gameObject.name}] 손님 퇴장!! (주문 완료)");
+
+        // GameManager.instance. +100
+        EnterExitState();
+    }
+
     public void FailOrder()
     {
         Debug.Log($"[{gameObject.name}] 손님 퇴장!! (주문 실패)");
 
+        // GameManager.instance. -50
         StartCoroutine(Co_Angry());
     }
 
@@ -128,13 +138,6 @@ public class Customer : MonoBehaviour
         yield return new WaitForSeconds(animLength * 1.5f);
 
         // 퇴장 시작
-        EnterExitState();
-    }
-
-    public void CompleteOrder()
-    {
-        SoundManager.instance.PlayCustomerSFX(SoundManager.SFX.Good, customerType);
-        Debug.Log($"[{gameObject.name}] 손님 퇴장!! (주문 완료)");
         EnterExitState();
     }
 
