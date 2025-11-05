@@ -22,8 +22,8 @@ public class CustomerManager : MonoBehaviour
 
 
     [Header("Spawn Interval")]
-    public Vector2 easySpawnInterval = new Vector2(15f, 20f);
-    public Vector2 hardSpawnInterval = new Vector2(10f, 12f);
+    public Vector2 easySpawnInterval = new Vector2(20f, 25f);
+    public Vector2 hardSpawnInterval = new Vector2(15f, 20f);
     float interval;
 
 
