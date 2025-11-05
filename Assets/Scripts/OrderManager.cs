@@ -31,6 +31,10 @@ public class OrderManager : MonoBehaviour
 
 
     [Header(" === Ingredient Prefab === ")]
+    public int easyToppingMin = 2;
+    public int easyToppingMax = 4;
+    public int hardToppingMin = 4;
+    public int hardToppingMax = 6;
     public List<IngredientSprite> ingredientSprites;
     private Dictionary<Ingredient, GameObject> spriteDict = new Dictionary<Ingredient, GameObject>();
 
@@ -152,20 +156,37 @@ public class OrderManager : MonoBehaviour
         for (int i = 0; i < pattyCount; i++)
             middle.Add(Ingredient.Patty);
 
-        // 3) 토핑 개수 결정
-        AddRandomToppings(middle, Ingredient.Lettuce, lettuce0Prob, lettuce1Prob, lettuce2Prob);
-        AddRandomToppings(middle, Ingredient.Tomato, tomato0Prob, tomato1Prob, tomato2Prob);
-        AddRandomToppings(middle, Ingredient.Cheese, cheese0Prob, cheese1Prob, cheese2Prob);
-        AddRandomToppings(middle, Ingredient.Onion, onion0Prob, onion1Prob, onion2Prob);
+        // 3) 토핑 개수 제한 적용
+        int toppingCount;
+        if (GameManager.instance.currentMode == GameManager.GameMode.Easy)
+        {
+            toppingCount = Random.Range(easyToppingMin, easyToppingMax + 1);
+        }
+        else
+        {
+            toppingCount = Random.Range(hardToppingMin, hardToppingMax + 1);
+        }
+        toppingCount -= pattyCount;
+
+        List<Ingredient> possible = new List<Ingredient>() {Ingredient.Lettuce,
+                                                            Ingredient.Tomato,
+                                                            Ingredient.Cheese,
+                                                            Ingredient.Onion };
+
+        for (int i = 0; i < toppingCount; i++)
+        {
+            Ingredient choose = possible[Random.Range(0, possible.Count)];
+            middle.Add(choose);
+        }
 
         // 4) 토핑 순서 섞기
         Shuffle(middle);
-        order.AddRange(middle);
 
         // 4) 마지막 빵
+        order.AddRange(middle);
         order.Add(Ingredient.TopBun);
-        ShowOrder();
 
+        ShowOrder();
         return order;
     }
 

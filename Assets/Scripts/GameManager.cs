@@ -139,12 +139,14 @@ public class GameManager : MonoBehaviour
     public void ResultGame()
     {
         Debug.Log("[GameManager] 정산 완료");
+        SoundManager.instance.PlayMainBGM();
 
-        resultScoreText.text = $"{currentScore}점";
-        successCustomerText.text = $"{successCount}개";
-        failCustomerText.text = $"{failCount}개";
+        resultScoreText.text = $"Total Score: {currentScore}";
+        successCustomerText.text = $"Success Order: {successCount}";
+        failCustomerText.text = $"Fail Order: {failCount}";
 
         resultPanel.SetActive(true);
+        scorePanel.SetActive(false);
     }
 
     public void ResultCheck()
@@ -166,6 +168,7 @@ public class GameManager : MonoBehaviour
 
         // 게임 초기화
         CustomerManager.instance.GameStop();
+        SoundManager.instance.PlayMainBGM();
         ResetTimer();
         ResetScore();
 
