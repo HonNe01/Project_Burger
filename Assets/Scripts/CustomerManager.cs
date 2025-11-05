@@ -66,6 +66,10 @@ public class CustomerManager : MonoBehaviour
 
     public void GameStop()
     {
+        // 주문 초기화
+        OrderManager.instance.OrderClear();
+
+        // 손님 초기화
         ClearCustomer();
         StopAllCoroutines();
     }

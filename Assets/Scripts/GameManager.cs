@@ -139,6 +139,7 @@ public class GameManager : MonoBehaviour
     public void ResultGame()
     {
         Debug.Log("[GameManager] 정산 완료");
+        CustomerManager.instance.GameStop();
         SoundManager.instance.PlayMainBGM();
 
         resultScoreText.text = $"Total Score: {currentScore}";
@@ -151,6 +152,9 @@ public class GameManager : MonoBehaviour
 
     public void ResultCheck()
     {
+        ResetTimer();
+        ResetScore();
+
         mainPanel.SetActive(true);
         resultPanel.SetActive(false);
     }

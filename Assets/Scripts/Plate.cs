@@ -11,8 +11,7 @@ public class Plate : MonoBehaviour
     public Transform plateCenter;
     [Tooltip("재료가 접시 위에 있는지 판별할 감지 영역")]
     public Collider plateTrigger;
-
-    private List<GameObject> stackedToppings = new List<GameObject>();
+    [SerializeField] private List<GameObject> stackedToppings = new List<GameObject>();
 
     [Header("Order Setting")]
     [SerializeField] private Customer curCustomer;
