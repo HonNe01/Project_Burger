@@ -60,13 +60,24 @@ public class CustomerManager : MonoBehaviour
             Debug.Log($"[Customer Manager] 경영 시작! 현재 모드 : Easy, 손님 간격 : {easySpawnInterval}");
         }
 
-        customerQueue.Clear();
+        ClearCustomer();
         StartCoroutine(Co_SpawnCustomer());
     }
 
     public void GameStop()
     {
+        ClearCustomer();
+        StopAllCoroutines();
+    }
 
+    public void ClearCustomer()
+    {
+        for (int i = 0; i < customerQueue.Count; i++)
+        {
+            if (customerQueue[i] != null) Destroy(customerQueue[i].gameObject);
+        }
+
+        customerQueue.Clear();
     }
 
     private IEnumerator Co_SpawnCustomer()
