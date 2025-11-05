@@ -4159,7 +4159,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1281787457}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4167,7 +4167,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13.5, y: 8.25}
+  m_AnchoredPosition: {x: -8.83, y: 8.25}
   m_SizeDelta: {x: 2, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1281787459
@@ -7696,7 +7696,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2049505848}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7704,7 +7704,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13.5, y: 8.17}
+  m_AnchoredPosition: {x: -4.81, y: 8.17}
   m_SizeDelta: {x: 2, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2049505850
@@ -10571,7 +10571,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2651173288044528266, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
       propertyPath: m_text
-      value: "\uC2E4\uD328\uD55C \uC8FC\uBB38 \uC218\n 0"
+      value: "Fail\n 0"
       objectReference: {fileID: 0}
     - target: {fileID: 2651173288044528266, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
       propertyPath: m_fontAsset
@@ -10631,7 +10631,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: b12181109962045fb9b47021a6460799, type: 3}
     - target: {fileID: 8706715615016984023, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8753012147894327606, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
       propertyPath: m_text
@@ -10681,12 +10681,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9122579868836090769, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
       propertyPath: m_text
-      value: "\uC131\uACF5\uD55C \uC8FC\uBB38 \uC218\n 0"
+      value: "Success\n 0"
       objectReference: {fileID: 0}
     - target: {fileID: 9122579868836090769, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 2188c9eb5a27b4260b23fae671fff1e7, type: 2}
+      objectReference: {fileID: 11400000, guid: 53cfbb97dd87c4d5ca22919e1083ab62, type: 2}
     - target: {fileID: 9122579868836090769, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
       propertyPath: m_lineSpacing
       value: -30
@@ -10694,7 +10694,7 @@ PrefabInstance:
     - target: {fileID: 9122579868836090769, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 6212865460453071361, guid: 2188c9eb5a27b4260b23fae671fff1e7, type: 2}
+      objectReference: {fileID: -4179040929050434843, guid: 53cfbb97dd87c4d5ca22919e1083ab62, type: 2}
     - target: {fileID: 9122579868836090769, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 4
