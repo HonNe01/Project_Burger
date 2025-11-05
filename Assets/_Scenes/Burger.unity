@@ -10192,7 +10192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8959602306799072519, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
       propertyPath: m_Name
-      value: Main Canvas
+      value: Game Manager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -4633,7 +4633,7 @@ GameObject:
   - component: {fileID: 8217915318486458926}
   - component: {fileID: 8537233232359305723}
   m_Layer: 5
-  m_Name: Main Canavs
+  m_Name: Game Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
