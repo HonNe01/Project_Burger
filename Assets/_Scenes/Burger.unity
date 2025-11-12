@@ -17051,6 +17051,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -6.08
       objectReference: {fileID: 0}
+    - target: {fileID: 212882598059393617, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1082776920734873540, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -17179,6 +17183,14 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1766006945}
+    - target: {fileID: 3581047550013582177, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3743178265358375892, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5999838131969323973, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
@@ -17211,6 +17223,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: b12181109962045fb9b47021a6460799, type: 3}
+    - target: {fileID: 7238655950811969745, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 02cc602dd2c364fa69f485f63ce8a725, type: 3}
+    - target: {fileID: 8039470909020230062, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b12181109962045fb9b47021a6460799, type: 3}
+    - target: {fileID: 8614673661028961256, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8706715615016984023, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -17260,6 +17284,10 @@ PrefabInstance:
     - target: {fileID: 8959602306799072519, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
       propertyPath: m_Name
       value: Game Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 9113690234442206428, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9122579868836090769, guid: 45c3e86a65bac4ac29c2fc391cd7896f, type: 3}
       propertyPath: m_text
