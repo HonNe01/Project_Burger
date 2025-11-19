@@ -35,6 +35,11 @@ public class ServingButton : MonoBehaviour
         {
             plate.CompleteOrder();
         }
+        else if (GameManager.instance.isTutorial && Tutorial.instance.currentStep == Tutorial.Step.ServingBurger)
+        {
+            Tutorial.instance.OnServing();
+            plate.ClearPlate();
+        }
 
         StartCoroutine(Co_Unlock(cooldown));
     }

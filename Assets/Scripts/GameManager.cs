@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour
 
 
     [Header("=== Tutorial ===")]
-    public Tutorial tutorial;
     public bool isTutorial = false;
 
 
@@ -139,7 +138,7 @@ public class GameManager : MonoBehaviour
         {
             if (isTutorial == true) return;
 
-            tutorial.StartTutorial();
+            Tutorial.instance.StartTutorial();
             return;
         }
 

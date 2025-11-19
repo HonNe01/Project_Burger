@@ -79,6 +79,7 @@ public class Patty : MonoBehaviour
                 currentState = CookingState.Cooked;
                 ReplaceModel(cookedPattyModelPrefab);
                 Debug.Log($"누적 {timeToCook}초 → 익은 패티로 변경!");
+                Tutorial.instance.OnPattyCooked();
             }
             else if (currentState == CookingState.Cooked && cookingProgress >= timeToBurn)
             {

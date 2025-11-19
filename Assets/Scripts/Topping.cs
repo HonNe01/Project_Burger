@@ -88,6 +88,8 @@ public class Topping : MonoBehaviour
             plate = null;
             isPlate = false;
         }
+
+        Tutorial.instance.OnGrabIngredient(ingredientType);
     }
 
     private void OnReleased(SelectExitEventArgs args)
@@ -98,6 +100,8 @@ public class Topping : MonoBehaviour
         {
             isPlate = true;
             plate.AddTopping(gameObject);
+
+            Tutorial.instance.OnPutIngredientOnPlate(ingredientType);
         }
         else
         {
