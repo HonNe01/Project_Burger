@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public enum GameMode { None, Easy, Hard }
+    public enum GameMode { None, Tutorial, Easy, Hard }
 
     [Header("=== Game Setting ===")]
     public GameMode currentMode = GameMode.None;
@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     [Header("=== Game UI ===")]
     [SerializeField] private GameObject mainPanel;
+    [SerializeField] private GameObject tutorialPanel;
     [SerializeField] private GameObject easyPanel;
     [SerializeField] private GameObject hardPanel;
     [SerializeField] private GameObject exitPanel;
@@ -31,12 +32,18 @@ public class GameManager : MonoBehaviour
 
     [Header("=== Timer (TextMeshPro) ===")]
     [SerializeField] private TextMeshProUGUI timerTMP;
+    [SerializeField] private float startTime = 180f;
 
-    [SerializeField] private float startTime = 180f;    
+
+    [Header("=== Tutorial ===")]
+    public Tutorial tutorial;
+    public bool isTutorial = false;
+
 
     // 내부 관리 변수들
     private float remainingTime;
     private bool isTimerRunning = false;
+    
 
     void Awake()
     {
@@ -77,6 +84,20 @@ public class GameManager : MonoBehaviour
     }
 
     // ====== 모드 선택 관련 ======
+    public void SetTutorial()
+    {
+        Debug.Log("게임 모드: Tutorial 선택됨");
+
+        currentMode = GameMode.Tutorial;
+        tutorialPanel.SetActive(true);
+    }
+    
+    public void TutorialNo()
+    {
+        currentMode = GameMode.None;
+        tutorialPanel.SetActive(false);
+    }
+
     public void SetEasy()
     {
         Debug.Log("게임 모드: Easy 선택됨");
@@ -108,6 +129,20 @@ public class GameManager : MonoBehaviour
     // ====== 게임 시작 ======
     public void StartGame()
     {
+        if (currentMode == GameMode.None)
+        {
+            Debug.LogWarning("[GameManager] 게임 모드 선택 안함");
+
+            return;
+        }
+        else if (currentMode == GameMode.Tutorial)
+        {
+            if (isTutorial == true) return;
+
+            tutorial.StartTutorial();
+            return;
+        }
+
         easyPanel.SetActive(false);
         hardPanel.SetActive(false);
 
