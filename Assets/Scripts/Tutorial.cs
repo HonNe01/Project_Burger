@@ -33,8 +33,8 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private string[] introTexts;
     [SerializeField] private string[] grabBottomBunTexts;
     [SerializeField] private string[] putBottomBunTexts;
-    [SerializeField] private string[] cookPattyTexts;
     [SerializeField] private string[] grabPattyTexts;
+    [SerializeField] private string[] cookPattyTexts;
     [SerializeField] private string[] putPattyTexts;
     [SerializeField] private string[] grabCheeseTexts;
     [SerializeField] private string[] putCheeseTexts;
@@ -237,7 +237,7 @@ public class Tutorial : MonoBehaviour
                 if (ing == Ingredient.Patty)
                 {
                     Debug.Log("[Tutorial] 패티 잡기 완료");
-                    GoToStep(Step.PutPatty);
+                    GoToStep(Step.CookPatty);
                 }
                 break;
 
@@ -293,7 +293,7 @@ public class Tutorial : MonoBehaviour
                 if (ing == Ingredient.BottomBun)
                 {
                     Debug.Log("[Tutorial] 아래 빵 놓기 완료");
-                    GoToStep(Step.CookPatty);
+                    GoToStep(Step.GrabPatty);
                 }
                 break;
 
