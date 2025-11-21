@@ -51,6 +51,28 @@ public class Tutorial : MonoBehaviour
     private string[] currentTexts = null;
     private int currentTextIndex = 0;
 
+    [Header("=== Tutorial Light ===")]
+    [SerializeField] private Light focusLight;    
+
+    [SerializeField] private Transform bottomBunPoint;
+    [SerializeField] private Transform pattyPoint;
+    [SerializeField] private Transform grillPoint;
+    [SerializeField] private Transform cheesePoint;
+    [SerializeField] private Transform tomatoPoint;
+    [SerializeField] private Transform onionPoint;
+    [SerializeField] private Transform lettucePoint;
+    [SerializeField] private Transform topbunPoint;
+    [SerializeField] private Transform platePoint;
+    [SerializeField] private Transform servingPoint;
+    private Transform currentFocusTarget;
+
+    
+    private float originAmbIntensity;
+    private float originRefIntensity;
+    [SerializeField] private float originFocusIntensity;
+    [SerializeField] private float focusHeightOffset = 0.5f;
+    [SerializeField] private float focusDistance = 1.0f;
+
     private void Awake()
     {
         if (instance == null) instance = this;
@@ -58,6 +80,12 @@ public class Tutorial : MonoBehaviour
 
         if (tutorialPanel != null) tutorialPanel.SetActive(false);
         if (tutorialText != null) tutorialText.text = string.Empty;
+
+        if (focusLight != null)
+        {
+            originFocusIntensity = focusLight.intensity;
+            focusLight.enabled = false;
+        }
     }
     
     // ===== Tutorial Start/End =====
@@ -68,6 +96,9 @@ public class Tutorial : MonoBehaviour
 
         if (tutorialPanel != null) tutorialPanel.SetActive(true);
 
+        // 라이트 세팅
+        EnterTutorialLights();
+
         currentStep = Step.None;
         SetCurrentTexts(introTexts);
     }
@@ -76,9 +107,51 @@ public class Tutorial : MonoBehaviour
     {
         GameManager.instance.isTutorial = false;
         Debug.Log("[Tutorial] 튜토리얼 종료");
+
+        // 라이트 복구
+        ExitTutorialLights();
+
+        // UI 복구
+        if (tutorialPanel != null) tutorialPanel.SetActive(false);
+
+        // 상태 초기화
+        currentStep = Step.None;
+        currentTexts = null;
+        currentTextIndex = 0;
+        currentFocusTarget = null;
+
+        if (tutorialText != null) tutorialText.text = string.Empty;
     }
 
     // ===== Text Process =====
+    private void SetCurrentTexts(string[] texts) // 현재 스텝의 텍스트 바운딩
+    {
+        Debug.Log("[Tutorial] Set Text ");
+        currentTexts = texts;
+        currentTextIndex = 0;
+
+        UpdateTutorialText();
+    }
+
+    private void UpdateTutorialText()           // 현재 스텝의 텍스트 출력
+    {
+        if (tutorialText == null) return;
+        if (currentTexts == null || currentTexts.Length == 0)
+        {
+            tutorialText.text = string.Empty;
+            return;
+        }
+
+        // 현재 스텝의 텍스트 길이 측정
+        if (currentTextIndex < 0 || currentTextIndex >= currentTexts.Length)
+        {
+            currentTextIndex = Mathf.Clamp(currentTextIndex, 0, currentTexts.Length - 1);
+        }
+
+        // 텍스트 출력
+        tutorialText.text = currentTexts[currentTextIndex];
+    }
+
     public void OnClickNext()   // 다음 버튼
     {
         if (currentTexts == null || currentTexts.Length == 0) return;
@@ -89,9 +162,11 @@ public class Tutorial : MonoBehaviour
         // 문구 출력
         if (currentTextIndex >= currentTexts.Length)
         {
-            currentTextIndex = currentTexts.Length - 1;
+            UpdateTutorialText();
             return;
         }
+
+        currentTextIndex = currentTexts.Length - 1;
 
         // 다음 단계 진행
         if (currentStep == Step.None)
@@ -99,8 +174,6 @@ public class Tutorial : MonoBehaviour
             GoToStep(Step.GrabBottomBun);
             return;
         }
-
-        currentTextIndex = currentTexts.Length - 1;
     }
 
     private void GoToStep(Step nextStep)        // 스텝 설정
@@ -110,6 +183,7 @@ public class Tutorial : MonoBehaviour
 
         string[] texts = GetTextsForStep(currentStep);
         SetCurrentTexts(texts);
+        UpdateLight();
     }
 
     private string[] GetTextsForStep(Step step) // 스텝 별 텍스트 선택
@@ -137,30 +211,6 @@ public class Tutorial : MonoBehaviour
         }
     }
 
-    private void SetCurrentTexts(string[] texts) // 텍스트 출력
-    {
-        currentTexts = texts;
-        currentTextIndex = 0;
-
-        UpdateTutorialText();
-    }
-
-    private void UpdateTutorialText()
-    {
-        if (tutorialText == null) return;
-        if (currentTexts == null || currentTexts.Length == 0)
-        {
-            tutorialText.text = string.Empty;
-            return;
-        }
-
-        if (currentTextIndex < 0 || currentTextIndex >= currentTexts.Length)
-        {
-            currentTextIndex = Mathf.Clamp(currentTextIndex, 0, currentTexts.Length - 1);
-        }
-
-        tutorialText.text = currentTexts[currentTextIndex];
-    }
 
     // ===== Game Interaction =====
     public void OnGrabIngredient(Ingredient ing) // 재료 집기 판단
@@ -307,5 +357,124 @@ public class Tutorial : MonoBehaviour
 
         Debug.Log("[Tutorial] 서빙 완료, 튜토리얼 끝");
         GoToStep(Step.End);
+    }
+
+
+    // ===== Tutorial Light =====
+    private void EnterTutorialLights()
+    {
+        // 원본 값 저장
+        originAmbIntensity = RenderSettings.ambientIntensity;
+        originRefIntensity = RenderSettings.reflectionIntensity;
+
+        // 라이트 세팅
+        RenderSettings.ambientIntensity = 0.2f;
+        RenderSettings.reflectionIntensity = 0.3f;
+
+        if (focusLight != null)
+        {
+            focusLight.intensity = originFocusIntensity;
+            focusLight.enabled = true;
+        }
+    }
+
+    private void ExitTutorialLights()
+    {
+        // 라이트 복구
+        RenderSettings.ambientIntensity = originAmbIntensity;
+        RenderSettings.reflectionIntensity = originRefIntensity;
+        
+        if (focusLight != null) focusLight.enabled = false;
+
+        currentFocusTarget = null;
+    }
+
+    private void UpdateLight()
+    {
+        switch (currentStep)
+        {
+            // === Grab 계열: 재료를 집는 곳 ===
+            case Step.None:
+                FocusOn();
+                break;
+
+            case Step.GrabBottomBun:
+                FocusOn(bottomBunPoint);
+                break;
+
+            case Step.GrabPatty:
+                FocusOn(pattyPoint);       // 패티 집는 곳(패티 트레이)
+                break;
+
+            case Step.GrabCheese:
+                FocusOn(cheesePoint);
+                break;
+
+            case Step.GrabTomato:
+                FocusOn(tomatoPoint);
+                break;
+
+            case Step.GrabOnion:
+                FocusOn(onionPoint);
+                break;
+
+            case Step.GrabLettuce:
+                FocusOn(lettucePoint);
+                break;
+
+            case Step.GrabTopBun:
+                FocusOn(topbunPoint);
+                break;
+
+            // === Cook: 패티 굽는 곳 ===
+            case Step.CookPatty:
+                FocusOn(grillPoint);
+                break;
+
+            // === Put 계열: 집어온 재료를 놓는 곳 (PlatePoint) ===
+            case Step.PutBottomBun:
+            case Step.PutPatty:
+            case Step.PutCheese:
+            case Step.PutTomato:
+            case Step.PutOnion:
+            case Step.PutLettuce:
+            case Step.PutTopBun:
+                FocusOn(platePoint);
+                break;
+
+            // === 서빙 ===
+            case Step.ServingBurger:
+                FocusOn(servingPoint);
+                break;
+
+            // 그 외 (인트로 / End 등)
+            default:
+                ClearFocus();
+                break;
+        }
+    }
+
+    private void FocusOn(Transform target = null)   // 라이트 상태 조정
+    {
+        currentFocusTarget = target;
+        if (focusLight != null && !focusLight.enabled) focusLight.enabled = true;
+        else if (target == null) focusLight.enabled = false;
+
+        UpdateFocus();
+    }
+
+    private void UpdateFocus()  // 라이트 위치 조정
+    {
+        if (focusLight == null || currentFocusTarget == null) return;
+
+        // 라이트 위치 조정
+        Vector3 targetPos = currentFocusTarget.position;
+        focusLight.transform.position = targetPos;
+    }
+    
+    private void ClearFocus()
+    {
+        currentFocusTarget = null;
+        focusLight.enabled = false; 
     }
 }
