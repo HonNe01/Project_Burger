@@ -15675,6 +15675,10 @@ PrefabInstance:
       value: Grill
       objectReference: {fileID: 0}
     - target: {fileID: 7297760156167330341, guid: 3bab677d42ba8483988cba710b2900c4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7297760156167330341, guid: 3bab677d42ba8483988cba710b2900c4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.887
       objectReference: {fileID: 0}
@@ -15712,6 +15716,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7297760156167330341, guid: 3bab677d42ba8483988cba710b2900c4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7297760156167330341, guid: 3bab677d42ba8483988cba710b2900c4, type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -17306,8 +17314,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -6.887, y: 0, z: -1.202}
-  m_LocalScale: {x: 1.3999996, y: 1.12, z: 1.12}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1.3999996, y: 1, z: 1.12}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3111849622710164991}
   - {fileID: 4801145153830859313}
@@ -17501,8 +17509,12 @@ PrefabInstance:
       objectReference: {fileID: 761780609}
     - target: {fileID: 3729170661812826859, guid: 13cae19fde7e8420fbb2bad6b8e7e725, type: 3}
       propertyPath: introTexts.Array.data[0]
-      value: "\uC548\uB155\uD558\uC138\uC694! \\n\uBC84\uAC70 \uB7EC\uC26C\uC5D0
-        \uC624\uC2E0 \uAC83\uC744 \uD658\uC601\uD569\uB2C8\uB2E4!"
+      value: "\uC548\uB155\uD558\uC138\uC694! \n\uBC84\uAC70 \uB7EC\uC26C\uC5D0 \uC624\uC2E0
+        \uAC83\uC744 \uD658\uC601\uD569\uB2C8\uB2E4!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3729170661812826859, guid: 13cae19fde7e8420fbb2bad6b8e7e725, type: 3}
+      propertyPath: cookedPattyTexts.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3729170661812826859, guid: 13cae19fde7e8420fbb2bad6b8e7e725, type: 3}
       propertyPath: cookPattyTexts.Array.data[0]
@@ -17510,9 +17522,23 @@ PrefabInstance:
         \uCC28\uB840\uC785\uB2C8\uB2E4."
       objectReference: {fileID: 0}
     - target: {fileID: 3729170661812826859, guid: 13cae19fde7e8420fbb2bad6b8e7e725, type: 3}
+      propertyPath: grabPattyTexts.Array.data[0]
+      value: "\uC774\uC81C \uB4A4\uC5D0 \uC788\uB294 \uD328\uD2F0\uB97C \uC9D1\uC5B4\uBCF4\uC138\uC694."
+      objectReference: {fileID: 0}
+    - target: {fileID: 3729170661812826859, guid: 13cae19fde7e8420fbb2bad6b8e7e725, type: 3}
+      propertyPath: cookedPattyTexts.Array.data[0]
+      value: "\uD328\uD2F0\uAC00 \uC798 \uAD6C\uC6CC\uC84C\uC5B4\uC694! \uC5B4\uC11C
+        \uD328\uD2F0\uB97C \uC9D1\uC73C\uC138\uC694!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3729170661812826859, guid: 13cae19fde7e8420fbb2bad6b8e7e725, type: 3}
+      propertyPath: cookedPattyTexts.Array.data[1]
+      value: "\uD328\uD2F0\uB97C \uC77C\uC815 \uC2DC\uAC04 \uC774\uB0B4\uC5D0\n\uADF8\uB9B4\uC5D0\uC11C
+        \uAEBC\uB0B4\uC9C0 \uC54A\uC73C\uBA74 \uAE4C\uB9E3\uAC8C \uD0C0\uBC84\uB9B0\uB2F5\uB2C8\uB2E4!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3729170661812826859, guid: 13cae19fde7e8420fbb2bad6b8e7e725, type: 3}
       propertyPath: putBottomBunTexts.Array.data[0]
-      value: "\uC798\uD588\uC5B4\uC694! \uC774\uC81C \uBE75\uC744 \uB3C4\uB9C8 \uC704\uC5D0
-        \uAE54\uC544\uBCF4\uC138\uC694."
+      value: "\uC798\uD588\uC5B4\uC694! \n\uC774\uC81C \uBE75\uC744 \uB3C4\uB9C8
+        \uC704\uC5D0 \uAE54\uC544\uBCF4\uC138\uC694."
       objectReference: {fileID: 0}
     - target: {fileID: 3729170661812826859, guid: 13cae19fde7e8420fbb2bad6b8e7e725, type: 3}
       propertyPath: grabBottomBunTexts.Array.data[0]

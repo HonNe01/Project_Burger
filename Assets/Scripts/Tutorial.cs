@@ -11,7 +11,7 @@ public class Tutorial : MonoBehaviour
     {
         None,
         GrabBottomBun, PutBottomBun,
-        GrabPatty, CookPatty, PutPatty,
+        GrabPatty, CookPatty, CookedPatty, PutPatty,
         GrabCheese, PutCheese,
         GrabTomato, PutTomato,
         GrabOnion, PutOnion,
@@ -30,25 +30,26 @@ public class Tutorial : MonoBehaviour
 
 
     [Header("=== Tutorial Texts ===")]
-    [SerializeField] private string[] introTexts;
-    [SerializeField] private string[] grabBottomBunTexts;
-    [SerializeField] private string[] putBottomBunTexts;
-    [SerializeField] private string[] grabPattyTexts;
-    [SerializeField] private string[] cookPattyTexts;
-    [SerializeField] private string[] putPattyTexts;
-    [SerializeField] private string[] grabCheeseTexts;
-    [SerializeField] private string[] putCheeseTexts;
-    [SerializeField] private string[] grabTomatoTexts;
-    [SerializeField] private string[] putTomatoTexts;
-    [SerializeField] private string[] grabOnionTexts;
-    [SerializeField] private string[] putOnionTexts;
-    [SerializeField] private string[] grabLettuceTexts;
-    [SerializeField] private string[] putLettuceTexts;
-    [SerializeField] private string[] grabTopBunTexts;
-    [SerializeField] private string[] putTopBunTexts;
-    [SerializeField] private string[] servingTexts;
-    [SerializeField] private string[] endTexts;
-    private string[] currentTexts = null;
+    [SerializeField][TextArea] private string[] introTexts;
+    [SerializeField][TextArea] private string[] grabBottomBunTexts;
+    [SerializeField][TextArea] private string[] putBottomBunTexts;
+    [SerializeField][TextArea] private string[] grabPattyTexts;
+    [SerializeField][TextArea] private string[] cookPattyTexts;
+    [SerializeField][TextArea] private string[] cookedPattyTexts;
+    [SerializeField][TextArea] private string[] putPattyTexts;
+    [SerializeField][TextArea] private string[] grabCheeseTexts;
+    [SerializeField][TextArea] private string[] putCheeseTexts;
+    [SerializeField][TextArea] private string[] grabTomatoTexts;
+    [SerializeField][TextArea] private string[] putTomatoTexts;
+    [SerializeField][TextArea] private string[] grabOnionTexts;
+    [SerializeField][TextArea] private string[] putOnionTexts;
+    [SerializeField][TextArea] private string[] grabLettuceTexts;
+    [SerializeField][TextArea] private string[] putLettuceTexts;
+    [SerializeField][TextArea] private string[] grabTopBunTexts;
+    [SerializeField][TextArea] private string[] putTopBunTexts;
+    [SerializeField][TextArea] private string[] servingTexts;
+    [SerializeField][TextArea] private string[] endTexts;
+    [TextArea]private string[] currentTexts = null;
     private int currentTextIndex = 0;
 
     [Header("=== Tutorial Light ===")]
@@ -200,6 +201,7 @@ public class Tutorial : MonoBehaviour
             case Step.PutBottomBun:     return putBottomBunTexts;
             case Step.GrabPatty:        return grabPattyTexts;
             case Step.CookPatty:        return cookPattyTexts;
+            case Step.CookedPatty:      return cookedPattyTexts;
             case Step.PutPatty:         return putPattyTexts;
             case Step.GrabCheese:       return grabCheeseTexts;
             case Step.PutCheese:        return putCheeseTexts;
@@ -353,6 +355,15 @@ public class Tutorial : MonoBehaviour
         if (currentStep != Step.CookPatty) return;
 
         Debug.Log("[Tutorial] 패티 굽기 완료");
+        GoToStep(Step.CookedPatty);
+    }
+
+    public void OnGrabCookedPatty()
+    {
+        if (!GameManager.instance.isTutorial) return;
+        if (currentStep != Step.CookPatty) return;
+
+        Debug.Log("[Tutorial] 구운 패티 집기 완료");
         GoToStep(Step.PutPatty);
     }
 
@@ -434,6 +445,7 @@ public class Tutorial : MonoBehaviour
 
             // === Cook: 패티 굽는 곳 ===
             case Step.CookPatty:
+            case Step.CookedPatty:
                 FocusOn(grillPoint);
                 break;
 

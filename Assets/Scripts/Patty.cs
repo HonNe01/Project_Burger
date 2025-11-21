@@ -56,6 +56,10 @@ public class Patty : MonoBehaviour
             StopBakingSound();
             Debug.Log("그릴에서 패티를 집었습니다. 시간 측정을 멈춥니다.");
         }
+        else if (currentState == CookingState.Cooked)
+        {
+            Tutorial.instance.OnGrabCookedPatty();
+        }
     }
 
     private void OnReleased(SelectExitEventArgs args)
