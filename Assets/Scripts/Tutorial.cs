@@ -11,7 +11,7 @@ public class Tutorial : MonoBehaviour
     {
         None,
         GrabBottomBun, PutBottomBun,
-        CookPatty, GrabPatty, PutPatty,
+        GrabPatty, CookPatty, PutPatty,
         GrabCheese, PutCheese,
         GrabTomato, PutTomato,
         GrabOnion, PutOnion,
@@ -88,7 +88,7 @@ public class Tutorial : MonoBehaviour
         }
     }
     
-    
+
     // ===== Tutorial Start/End =====
     public void StartTutorial()
     {
@@ -176,6 +176,10 @@ public class Tutorial : MonoBehaviour
             GoToStep(Step.GrabBottomBun);
             return;
         }
+        else if (currentStep == Step.End)
+        {
+            EndTutorial();
+        }
     }
 
     private void GoToStep(Step nextStep)        // 스텝 설정
@@ -194,8 +198,8 @@ public class Tutorial : MonoBehaviour
         {
             case Step.GrabBottomBun:    return grabBottomBunTexts;
             case Step.PutBottomBun:     return putBottomBunTexts;
-            case Step.CookPatty:        return cookPattyTexts;
             case Step.GrabPatty:        return grabPattyTexts;
+            case Step.CookPatty:        return cookPattyTexts;
             case Step.PutPatty:         return putPattyTexts;
             case Step.GrabCheese:       return grabCheeseTexts;
             case Step.PutCheese:        return putCheeseTexts;
@@ -349,7 +353,7 @@ public class Tutorial : MonoBehaviour
         if (currentStep != Step.CookPatty) return;
 
         Debug.Log("[Tutorial] 패티 굽기 완료");
-        GoToStep(Step.GrabPatty);
+        GoToStep(Step.PutPatty);
     }
 
     public void OnServing()
