@@ -139,6 +139,7 @@ public class GameManager : MonoBehaviour
             if (isTutorial == true) return;
 
             Tutorial.instance.StartTutorial();
+            tutorialPanel.SetActive(false);
             return;
         }
 

@@ -88,6 +88,7 @@ public class Tutorial : MonoBehaviour
         }
     }
     
+    
     // ===== Tutorial Start/End =====
     public void StartTutorial()
     {
@@ -122,6 +123,7 @@ public class Tutorial : MonoBehaviour
 
         if (tutorialText != null) tutorialText.text = string.Empty;
     }
+
 
     // ===== Text Process =====
     private void SetCurrentTexts(string[] texts) // 현재 스텝의 텍스트 바운딩
@@ -160,7 +162,7 @@ public class Tutorial : MonoBehaviour
         currentTextIndex++;
 
         // 문구 출력
-        if (currentTextIndex >= currentTexts.Length)
+        if (currentTextIndex < currentTexts.Length)
         {
             UpdateTutorialText();
             return;
